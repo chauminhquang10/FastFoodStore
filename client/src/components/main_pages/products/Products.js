@@ -6,9 +6,11 @@ import Loading from "../Utils/Loading/Loading";
 import axios from "axios";
 import FiltersProducts from "./FilterProducts";
 import LoadMore from "./LoadMore";
-import BackToTopBtn from "../../Back-To-Top-Button/BackToTopBtn";
+
 import swal from "sweetalert";
 import Pagination from "./Pagination";
+
+import SideBar from "./sidebar/SideBar";
 
 const Products = () => {
   const state = useContext(GlobalState);
@@ -93,6 +95,7 @@ const Products = () => {
   return (
     <>
       <FiltersProducts></FiltersProducts>
+
       {isAdmin && (
         <div className="delete-all">
           <span>Select all</span>
@@ -100,18 +103,21 @@ const Products = () => {
           <button onClick={deleteAll}>Delete All</button>
         </div>
       )}
-      <div className="products">
-        {currentProducts.map((product) => {
-          return (
-            <ProductItem
-              key={product._id}
-              product={product}
-              isAdmin={isAdmin}
-              deleteProduct={deleteProduct}
-              handleCheck={handleCheck}
-            ></ProductItem>
-          );
-        })}
+      <div className="both-container">
+        <SideBar></SideBar>
+        <div className="products">
+          {currentProducts.map((product) => {
+            return (
+              <ProductItem
+                key={product._id}
+                product={product}
+                isAdmin={isAdmin}
+                deleteProduct={deleteProduct}
+                handleCheck={handleCheck}
+              ></ProductItem>
+            );
+          })}
+        </div>
       </div>
       <Pagination
         productsPerPage={productsPerPage}
@@ -121,7 +127,6 @@ const Products = () => {
 
       {/* <LoadMore></LoadMore> */}
       {products.length === 0 && <Loading></Loading>}
-      <BackToTopBtn></BackToTopBtn>
     </>
   );
 };

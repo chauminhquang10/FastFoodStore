@@ -1,4 +1,5 @@
 import React from "react";
+import "./Pagination.css";
 
 const Pagination = ({ productsPerPage, totalProducts, paginate }) => {
   const pageNumbers = [];
@@ -8,7 +9,7 @@ const Pagination = ({ productsPerPage, totalProducts, paginate }) => {
   }
   return (
     <nav>
-      <ul className="pagination">
+      <ul className="pagination pagination-margin">
         {pageNumbers.map((number) => (
           <li key={number} className="page-item">
             <a onClick={() => paginate(number)} href="#" className="page-link">

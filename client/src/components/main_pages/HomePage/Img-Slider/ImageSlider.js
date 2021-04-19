@@ -30,28 +30,32 @@ const ImageSlider = ({ slides }) => {
   }
 
   return (
-    <section className="slider">
-      <FaArrowAltCircleLeft
-        className="left-arrow"
-        onClick={prevSlide}
-      ></FaArrowAltCircleLeft>
-      <FaArrowAltCircleRight
-        className="right-arrow"
-        onClick={nextSlide}
-      ></FaArrowAltCircleRight>
-      {slides.map((slide, index) => {
-        return (
-          <div
-            className={index === currentSlide ? "slide active" : "slide"}
-            key={index}
-          >
-            {index === currentSlide && (
-              <img src={slide.img_url} className="img"></img>
-            )}
-          </div>
-        );
-      })}
-    </section>
+    <>
+      <section className="slider">
+        <i class="fa fa-gift fa-3x" aria-hidden="true"></i>
+        <h1>BEST SELLER</h1>
+        <FaArrowAltCircleLeft
+          className="left-arrow"
+          onClick={prevSlide}
+        ></FaArrowAltCircleLeft>
+        <FaArrowAltCircleRight
+          className="right-arrow"
+          onClick={nextSlide}
+        ></FaArrowAltCircleRight>
+        {slides.map((slide, index) => {
+          return (
+            <div
+              className={index === currentSlide ? "slide active" : "slide"}
+              key={index}
+            >
+              {index === currentSlide && (
+                <img src={slide.img_url} className="img"></img>
+              )}
+            </div>
+          );
+        })}
+      </section>
+    </>
   );
 };
 

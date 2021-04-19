@@ -8,8 +8,6 @@ import Web_Logo from "../../website_logo.png";
 import axios from "axios";
 import Button from "./Button";
 
-import { useTranslation } from "react-i18next";
-
 const Header = () => {
   const state = useContext(GlobalState);
   const [isLogged, setIsLogged] = state.userAPI.isLogged;
@@ -23,8 +21,6 @@ const Header = () => {
   const menuClassname = ["nav-menu-3", "nav-menu-5"];
 
   const checkMenuSize = isAdmin ? menuClassname[1] : menuClassname[0];
-
-  const { t, i18n } = useTranslation();
 
   const showButton = () => {
     if (window.innerWidth <= 960) {
@@ -105,11 +101,6 @@ const Header = () => {
         </li>
       </>
     );
-  };
-
-  //cover language
-  const handleClick = (language) => {
-    i18n.changeLanguage(language);
   };
 
   return (

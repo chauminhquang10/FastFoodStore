@@ -13,6 +13,7 @@ const FilterProducts = () => {
     setCategory(event.target.value);
     setSearch("");
   };
+
   return (
     <div className="filter_menu">
       <div className="row">
