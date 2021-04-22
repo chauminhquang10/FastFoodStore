@@ -5,7 +5,7 @@
   width: 40px;
   height: 40px;
   border-radius: 100%;
-  background-color: #000;
+  background-color: red;
 }
 
 .scroll-to-top:hover {
@@ -16,6 +16,7 @@
   margin-top: 11px;
   animation: scrollTop 0.5s alternate ease infinite;
   color: #fff;
+  z-index: 99;
 }
 @keyframes scrollTop {
   from {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./BackToTopBtn.css";
 import { useWindowScroll } from "react-use";
+import hotLine from "../../images/hotLine2.png";
 
 const BackToTopBtn = () => {
   const { y: pageYOffset } = useWindowScroll();
@@ -15,6 +16,15 @@ const BackToTopBtn = () => {
 
   return (
     <>
+      <img
+        style={{
+          position: "sticky",
+          bottom: "0px",
+          left: "1900px",
+          zIndex: "1",
+        }}
+        src={hotLine}
+      />
       {visible && (
         <div
           className="scroll-to-top cursor-pointer text-center"

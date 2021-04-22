@@ -28,6 +28,11 @@
   align-items: center;
 }
 
+.hotline {
+  position: absolute;
+  bottom: "100px";
+}
+
 .nav-menu-3 {
   display: grid;
   grid-template-columns: repeat(3, auto);

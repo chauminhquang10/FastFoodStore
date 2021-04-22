@@ -43,12 +43,17 @@ function Grid_cards() {
   return (
     <div className="cards">
       <div className="cards__container">
-        <Grid alignItems="center" direction="row" container spacing={0}>
+        <Grid
+          style={{ width: "1600px" }}
+          alignItems="center"
+          direction="row"
+          container
+          spacing={0}
+        >
           <Grid
             style={{
               objectFit: "cover",
-              height: "531px",
-              overflow: "hidden",
+              height: "650px",
             }}
             item
             xs

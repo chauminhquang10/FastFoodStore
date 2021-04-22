@@ -14,6 +14,8 @@ import BackToTopBtn from "./components/Back-To-Top-Button/BackToTopBtn";
 
 import GoogleMap from "./GoogleMap";
 
+import hotLine from "../src/images/hotLine2.png";
+
 function App() {
   return (
     <>
