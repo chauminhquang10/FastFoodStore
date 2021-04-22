@@ -1,4 +1,4 @@
-Author: Minh Quang Chau - Nguyen Anh Hao
+Author: Chau Minh Quang  - Nguyen Anh Hao
 
 #demo-link: https://fastfoodstore-ecommerce.herokuapp.com/?fbclid=IwAR2h8LAa0WRp4q-Sazet90D7fTgYCdr0tsFmhfQtk0mpiGvW0gzp5WnWeLA
 
