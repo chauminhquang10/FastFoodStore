@@ -12,9 +12,13 @@ const Loading = () => {
   }, []);
   return (
     <>
-      {loading && (
+      {loading ? (
         <div className="HashLoader">
           <HashLoader color={"#ff6f00"} loading={loading} size={60} />
+        </div>
+      ) : (
+        <div className="loader-title">
+          <h1>There is nothing to shown !</h1>
         </div>
       )}
     </>

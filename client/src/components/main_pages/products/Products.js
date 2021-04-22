@@ -12,6 +12,8 @@ import Pagination from "./Pagination";
 
 import SideBar from "./sidebar/SideBar";
 
+import { motion } from "framer-motion";
+
 const Products = () => {
   const state = useContext(GlobalState);
   const [products, setProducts] = state.productsAPI.products;
@@ -93,8 +95,14 @@ const Products = () => {
   };
 
   return (
-    <>
+    <motion.div
+      exit={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+    >
       <FiltersProducts></FiltersProducts>
+
+      <h4>Hiển thị {currentProducts.length} kết quả</h4>
 
       {isAdmin && (
         <div className="delete-all">
@@ -127,7 +135,7 @@ const Products = () => {
 
       {/* <LoadMore></LoadMore> */}
       {products.length === 0 && <Loading></Loading>}
-    </>
+    </motion.div>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Button from "./Button";
+import Button from "../headers/Button";
 import "./Footer.css";
 import { Link } from "react-router-dom";
 import { GlobalState } from "../../GlobalState";

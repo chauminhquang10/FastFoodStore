@@ -4,6 +4,8 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
+  margin-bottom: 140px;
+  margin-top: 30px;
 }
 
 .upload {

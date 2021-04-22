@@ -4,6 +4,8 @@ import "./Categories.css";
 import axios from "axios";
 import swal from "sweetalert";
 
+import { motion } from "framer-motion";
+
 const Categories = () => {
   const state = useContext(GlobalState);
   const [categories, setCategories] = state.categoriesAPI.categories;
@@ -77,36 +79,44 @@ const Categories = () => {
   };
 
   return (
-    <div className="categories">
-      <form onSubmit={createCategory}>
-        <label htmlFor="category">Category</label>
-        <input
-          type="text"
-          name="category"
-          value={category}
-          required
-          onChange={(event) => setCategory(event.target.value)}
-        ></input>
+    <motion.div
+      exit={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+    >
+      <div className="categories">
+        <form onSubmit={createCategory}>
+          <label htmlFor="category">Category</label>
+          <input
+            type="text"
+            name="category"
+            value={category}
+            required
+            onChange={(event) => setCategory(event.target.value)}
+          ></input>
 
-        <button type="submit">{onEdit ? "Update" : "Create"}</button>
-      </form>
+          <button type="submit">{onEdit ? "Update" : "Create"}</button>
+        </form>
 
-      <div className="col">
-        {categories.map((category) => (
-          <div className="row" key={category._id}>
-            <p>{category.name}</p>
-            <div>
-              <button onClick={() => editCategory(category._id, category.name)}>
-                Edit
-              </button>
-              <button onClick={() => deleteCategory(category._id)}>
-                Delete
-              </button>
+        <div className="col">
+          {categories.map((category) => (
+            <div className="row" key={category._id}>
+              <p>{category.name}</p>
+              <div>
+                <button
+                  onClick={() => editCategory(category._id, category.name)}
+                >
+                  Edit
+                </button>
+                <button onClick={() => deleteCategory(category._id)}>
+                  Delete
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

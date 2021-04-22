@@ -27,8 +27,19 @@
 }
 
 .delete-all button {
-  border: 1px solid crimson;
-  padding: 10px 25px;
+  padding: 8px 20px;
   color: crimson;
   text-transform: uppercase;
+  background-color: transparent;
+  padding-bottom: 35px;
+  font-size: 16px;
+  border: 1px solid crimson;
+  transition: all 0.3s ease-out;
+}
+
+.delete-all button:hover {
+  transition: all 0.3s ease-out;
+  background: crimson;
+  color: #fff;
+  transition: 250ms;
 }

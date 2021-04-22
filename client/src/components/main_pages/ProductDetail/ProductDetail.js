@@ -4,6 +4,8 @@ import { GlobalState } from "../../../GlobalState";
 import "./ProductDetail.css";
 import ProductItem from "../Utils/productItem/ProductItem";
 
+import { motion } from "framer-motion";
+
 const ProductDetail = () => {
   const params = useParams();
   const state = useContext(GlobalState);
@@ -22,41 +24,50 @@ const ProductDetail = () => {
   if (productDetail.length === 0) return null;
   return (
     <>
-      <div className="detail">
-        <img src={productDetail.image.url} alt="product detail image"></img>
-        <div className="box-detail">
-          <div className="row">
-            <h2>{productDetail.title}</h2>
-            <h6>#{productDetail.product_id}</h6>
+      <motion.div
+        exit={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
+      >
+        <div className="detail">
+          <img src={productDetail.image.url} alt="product detail image"></img>
+          <div className="box-detail">
+            <div className="row">
+              <h2>{productDetail.title}</h2>
+              <h6>#{productDetail.product_id}</h6>
+            </div>
+            <span>${productDetail.price}</span>
+            <p>{productDetail.description}</p>
+            <p>{productDetail.content}</p>
+            <p>Sold: {productDetail.sold}</p>
+            <Link
+              to="/cart"
+              className="cart"
+              onClick={() => {
+                addToCart(productDetail);
+              }}
+            >
+              Buy Now
+            </Link>
           </div>
-          <span>${productDetail.price}</span>
-          <p>{productDetail.description}</p>
-          <p>{productDetail.content}</p>
-          <p>Sold: {productDetail.sold}</p>
-          <Link
-            to="/cart"
-            className="cart"
-            onClick={() => {
-              addToCart(productDetail);
-            }}
-          >
-            Buy Now
-          </Link>
         </div>
-      </div>
 
-      <div>
-        <h2>Related Products</h2>
-        <div className="products">
-          {products.map((product) => {
-            return (
-              product.category === productDetail.category && (
-                <ProductItem key={product._id} product={product}></ProductItem>
-              )
-            );
-          })}
+        <div>
+          <h2>Related Products</h2>
+          <div className="products">
+            {products.map((product) => {
+              return (
+                product.category === productDetail.category && (
+                  <ProductItem
+                    key={product._id}
+                    product={product}
+                  ></ProductItem>
+                )
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

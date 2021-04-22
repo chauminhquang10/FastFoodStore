@@ -6,6 +6,7 @@
   align-items: center;
   background-color: #fff;
   flex-direction: column;
+  width: 100%;
 }
 
 .slider h1 {
@@ -14,15 +15,14 @@
 }
 
 .img {
-  width: 700px;
-  height: 300px;
-  border-radius: 10px;
+  width: 1000px;
+  height: 400px;
 }
 
 .right-arrow {
   position: absolute;
-  top: 50%;
-  right: 25%;
+  top: 60%;
+  right: 8%;
   font-size: 2.5rem;
   color: black;
   cursor: pointer;
@@ -32,8 +32,8 @@
 
 .left-arrow {
   position: absolute;
-  top: 50%;
-  left: 25%;
+  top: 60%;
+  left: 8%;
   font-size: 2.5rem;
   color: black;
   cursor: pointer;

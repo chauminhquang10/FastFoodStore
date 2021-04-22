@@ -106,7 +106,7 @@ const Header = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo" onClick={() => setMenu(!menu)}>
+        <Link to="/" className="shop-logo" onClick={() => setMenu(!menu)}>
           {isAdmin ? "Admin" : "MamMam "}
           {/* <img src={Web_Logo}></img> */}
         </Link>

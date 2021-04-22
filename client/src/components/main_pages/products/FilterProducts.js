@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { GlobalState } from "../../../GlobalState";
 import "./FilterProducts.css";
 
@@ -9,14 +9,16 @@ const FilterProducts = () => {
   const [sort, setSort] = state.productsAPI.sort;
   const [search, setSearch] = state.productsAPI.search;
 
-  const handleCategory = (event) => {
-    setCategory(event.target.value);
-    setSearch("");
-  };
+  const [toggleSearch, setToggleSearch] = useState(false);
+
+  // const handleCategory = (event) => {
+  //   setCategory(event.target.value);
+  //   setSearch("");
+  // };
 
   return (
     <div className="filter_menu">
-      <div className="row">
+      {/* <div className="row">
         <span>Filters: </span>
         <select name="category" value={category} onChange={handleCategory}>
           <option value="">All products</option>
@@ -26,15 +28,20 @@ const FilterProducts = () => {
             </option>
           ))}
         </select>
-      </div>
+      </div> */}
+
+      <i
+        className="fa fa-search search_icon"
+        onClick={() => setToggleSearch(!toggleSearch)}
+      ></i>
 
       <input
+        className={toggleSearch ? "search-input active" : "search-input"}
         type="text"
         value={search}
         placeholder="Enter your search standards"
         onChange={(e) => setSearch(e.target.value.toLowerCase())}
       ></input>
-      <i className="fa fa-search search_icon"></i>
 
       <div className="row sort">
         <span>Sort By: </span>
