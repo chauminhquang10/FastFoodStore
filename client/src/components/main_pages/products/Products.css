@@ -12,7 +12,16 @@
 .delete-all {
   text-align: right;
   margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
+
+.delete-all h6 {
+  margin-right: 40px;
+  margin-top: 10px;
+}
+
 .delete-all input {
   height: 25px;
   width: 25px;

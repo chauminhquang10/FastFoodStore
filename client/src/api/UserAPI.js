@@ -6,6 +6,10 @@ const UserAPI = (token) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [cart, setCart] = useState([]);
   const [history, setHistory] = useState([]);
+  const [user, setUser] = useState([]);
+
+  const [allUsers, setAllUsers] = useState([]);
+  const [callback, setCallback] = useState(false);
 
   useEffect(() => {
     if (token) {
@@ -14,6 +18,7 @@ const UserAPI = (token) => {
           const res = await axios.get("/user/information", {
             headers: { Authorization: token },
           });
+          setUser(res.data);
           setIsLogged(true);
           res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false);
 
@@ -25,6 +30,22 @@ const UserAPI = (token) => {
       getUser();
     }
   }, [token]);
+
+  useEffect(() => {
+    if (isAdmin) {
+      const getAllUser = async () => {
+        try {
+          const res = await axios.get("/user/all_information", {
+            headers: { Authorization: token },
+          });
+          setAllUsers(res.data);
+        } catch (error) {
+          alert(error.response.data.msg);
+        }
+      };
+      getAllUser();
+    }
+  }, [token, isAdmin, callback]);
 
   const addToCart = async (product) => {
     if (!isLogged) return alert("Please login to buy products");
@@ -54,9 +75,12 @@ const UserAPI = (token) => {
   return {
     isLogged: [isLogged, setIsLogged],
     isAdmin: [isAdmin, setIsAdmin],
+    user: [user, setUser],
+    allUsers: [allUsers, setAllUsers],
     addToCart: addToCart,
     cart: [cart, setCart],
     history: [history, setHistory],
+    callback: [callback, setCallback],
   };
 };
 

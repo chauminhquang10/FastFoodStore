@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { GlobalState } from "../../../GlobalState";
 import "./FilterProducts.css";
 
+import SearchBar from "./SearchBar";
+
 const FilterProducts = () => {
   const state = useContext(GlobalState);
   const [categories] = state.categoriesAPI.categories;
@@ -9,16 +11,15 @@ const FilterProducts = () => {
   const [sort, setSort] = state.productsAPI.sort;
   const [search, setSearch] = state.productsAPI.search;
 
-  const [toggleSearch, setToggleSearch] = useState(false);
-
   // const handleCategory = (event) => {
   //   setCategory(event.target.value);
   //   setSearch("");
   // };
 
   return (
-    <div className="filter_menu">
-      {/* <div className="row">
+    <>
+      <div className="filter_menu">
+        {/* <div className="row">
         <span>Filters: </span>
         <select name="category" value={category} onChange={handleCategory}>
           <option value="">All products</option>
@@ -30,30 +31,27 @@ const FilterProducts = () => {
         </select>
       </div> */}
 
-      <i
-        className="fa fa-search search_icon"
-        onClick={() => setToggleSearch(!toggleSearch)}
-      ></i>
+        {/* <input
+          type="text"
+          value={search}
+          placeholder="Enter your search standards"
+          onChange={(e) => setSearch(e.target.value.toLowerCase())}
+        ></input> */}
 
-      <input
-        className={toggleSearch ? "search-input active" : "search-input"}
-        type="text"
-        value={search}
-        placeholder="Enter your search standards"
-        onChange={(e) => setSearch(e.target.value.toLowerCase())}
-      ></input>
+        <div className="row sort">
+          <span>Sort By: </span>
+          <select value={sort} onChange={(e) => setSort(e.target.value)}>
+            <option value="">Newest</option>
+            <option value="sort=createdAt">Oldest</option>
+            <option value="sort=-sold">Best sales</option>
+            <option value="sort=price">Price: Ascending </option>
+            <option value="sort=-price">Price: Descending</option>
+          </select>
+        </div>
 
-      <div className="row sort">
-        <span>Sort By: </span>
-        <select value={sort} onChange={(e) => setSort(e.target.value)}>
-          <option value="">Newest</option>
-          <option value="sort=createdAt">Oldest</option>
-          <option value="sort=-sold">Best sales</option>
-          <option value="sort=price">Price: Ascending </option>
-          <option value="sort=-price">Price: Descending</option>
-        </select>
+        <SearchBar></SearchBar>
       </div>
-    </div>
+    </>
   );
 };
 

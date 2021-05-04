@@ -6,6 +6,8 @@ import ProductItem from "../Utils/productItem/ProductItem";
 
 import { motion } from "framer-motion";
 
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+
 const ProductDetail = () => {
   const params = useParams();
   const state = useContext(GlobalState);
@@ -30,7 +32,16 @@ const ProductDetail = () => {
         initial={{ opacity: 0 }}
       >
         <div className="detail">
+          {/* <TransformWrapper
+            defaultScale={1}
+            defaultPositionX={400}
+            defaultPositionY={450}
+          >
+            <TransformComponent> */}
           <img src={productDetail.image.url} alt="product detail image"></img>
+          {/* </TransformComponent>
+          </TransformWrapper> */}
+
           <div className="box-detail">
             <div className="row">
               <h2>{productDetail.title}</h2>
@@ -52,7 +63,7 @@ const ProductDetail = () => {
           </div>
         </div>
 
-        <div>
+        <div className="related-products">
           <h2>Related Products</h2>
           <div className="products">
             {products.map((product) => {

@@ -12,6 +12,14 @@ import { GlobalState } from "../../GlobalState";
 import Categories from "./Categories/Categories";
 import CreateProduct from "./createProduct/CreateProduct";
 import HomePage from "./HomePage/HomePage";
+import ActivationEmail from "./authentication/ActivationEmail";
+import ForgotPassword from "./authentication/ForgotPassword";
+
+import ResetPassword from "./authentication/ResetPassword";
+
+import UserProfile from "../UserProfile/UserProfile";
+
+import EditUser from "../UserProfile/EditUser";
 
 import { AnimatePresence } from "framer-motion";
 
@@ -37,6 +45,37 @@ const Pages = () => {
             exact
             component={isLogged ? NotFound : Register}
           ></Route>
+
+          <Route
+            path="/user/activate/:activation_token"
+            exact
+            component={ActivationEmail}
+          ></Route>
+
+          <Route
+            path="/forgot_password"
+            exact
+            component={isLogged ? NotFound : ForgotPassword}
+          ></Route>
+
+          <Route
+            path="/user/reset/:token"
+            exact
+            component={isLogged ? NotFound : ResetPassword}
+          ></Route>
+
+          <Route
+            path="/profile"
+            exact
+            component={isLogged ? UserProfile : NotFound}
+          ></Route>
+
+          <Route
+            path="/edit_user/:id"
+            exact
+            component={isAdmin ? EditUser : NotFound}
+          ></Route>
+
           <Route path="/cart" exact component={Cart}></Route>
 
           <Route

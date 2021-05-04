@@ -3,6 +3,7 @@ import { GlobalState } from "../../GlobalState";
 
 import ShoppingCartIcon from "./icon/shopping-cart.png";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "../headers/Header.css";
 import Web_Logo from "../../website_logo.png";
 import axios from "axios";
@@ -12,6 +13,8 @@ const Header = () => {
   const state = useContext(GlobalState);
   const [isLogged, setIsLogged] = state.userAPI.isLogged;
   const [isAdmin, setIsAdmin] = state.userAPI.isAdmin;
+
+  const [user, setUser] = state.userAPI.user;
 
   const [cart] = state.userAPI.cart;
 
@@ -40,6 +43,8 @@ const Header = () => {
     await axios.get("/user/logout");
     setIsAdmin(false);
     setIsLogged(false);
+    setUser([]);
+    window.location.href = "/";
   };
 
   const adminRouter = () => {
@@ -103,6 +108,29 @@ const Header = () => {
     );
   };
 
+  //display user avatar
+  const userLink = () => {
+    return (
+      <li className="drop-nav">
+        <Link to="#" className="avatar">
+          <img src={user.avatar} alt="user avatar"></img>
+          {user.name}
+          <i className="fas fa-sort-down"></i>
+        </Link>
+        <ul className="dropdown">
+          <li>
+            <Link to="/profile">Profile</Link>
+          </li>
+          <li>
+            <Link to="/" onClick={onClickEvents}>
+              Log out
+            </Link>
+          </li>
+        </ul>
+      </li>
+    );
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -147,9 +175,9 @@ const Header = () => {
           <Button
             buttonStyle="btn--outline"
             isLogged={isLogged}
-            onClick={isLogged && onClickEvents}
+            // onClick={isLogged && onClickEvents}
           >
-            {!isLogged ? "SIGN UP" : "LOG OUT"}
+            {!isLogged ? "SIGN UP" : userLink()}
           </Button>
         )}
 

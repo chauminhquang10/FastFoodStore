@@ -101,6 +101,37 @@
   color: #fff;
 }
 
+/* user profile dropdown */
+.avatar img {
+  width: 30px;
+  height: 30px;
+  transform: translateY(-10px);
+}
+
+/* Dropdown */
+.drop-nav {
+  position: relative;
+  padding: 10px 0px;
+}
+
+.drop-nav a {
+  text-transform: capitalize;
+  overflow: hidden;
+}
+
+.drop-nav .dropdown {
+  position: absolute;
+  background-color: #282c34;
+  width: 100%;
+  width: calc(100% +30px);
+  top: 50px;
+  display: none;
+}
+
+.drop-nav:hover .dropdown {
+  display: block;
+}
+
 @media screen and (max-width: 960px) {
   .fa-caret-down {
     display: none;

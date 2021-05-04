@@ -24,6 +24,8 @@ app.use("/api", require("./routes/uploadImage"));
 app.use("/api", require("./routes/productRouter"));
 app.use("/api", require("./routes/paymentRouter"));
 
+app.use("/api", require("./routes/UploadAvatar"));
+
 //Connect to the database with MongoDB Atlas
 const URI = process.env.MONGODB_URL;
 mongoose.connect(

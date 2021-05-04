@@ -102,10 +102,9 @@ const Products = () => {
     >
       <FiltersProducts></FiltersProducts>
 
-      <h4>Hiển thị {currentProducts.length} kết quả</h4>
-
       {isAdmin && (
         <div className="delete-all">
+          <h6>Hiển thị: {currentProducts.length} kết quả</h6>
           <span>Select all</span>
           <input type="checkbox" checked={isCheck} onChange={checkAll}></input>
           <button onClick={deleteAll}>Delete All</button>

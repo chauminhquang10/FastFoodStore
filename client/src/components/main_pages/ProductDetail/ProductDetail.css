@@ -14,6 +14,11 @@
   object-fit: cover;
   display: block;
 }
+
+.related-products {
+  margin-left: 91px;
+}
+
 .box-detail {
   max-width: 500px;
   width: 100%;
