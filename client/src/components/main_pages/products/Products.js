@@ -100,8 +100,6 @@ const Products = () => {
       animate={{ opacity: 1 }}
       initial={{ opacity: 0 }}
     >
-      <FiltersProducts></FiltersProducts>
-
       <h4>Hiển thị {currentProducts.length} kết quả</h4>
 
       {isAdmin && (

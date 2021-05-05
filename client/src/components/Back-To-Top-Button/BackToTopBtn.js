@@ -16,7 +16,7 @@ const BackToTopBtn = () => {
 
   return (
     <>
-      <img
+      {/* <img
         style={{
           position: "sticky",
           bottom: "0px",
@@ -24,7 +24,7 @@ const BackToTopBtn = () => {
           zIndex: "1",
         }}
         src={hotLine}
-      />
+      /> */}
       {visible && (
         <div
           className="scroll-to-top cursor-pointer text-center"

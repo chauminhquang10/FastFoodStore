@@ -2,11 +2,13 @@ import React, { useState, useContext, useEffect } from "react";
 import { GlobalState } from "../../GlobalState";
 
 import ShoppingCartIcon from "./icon/shopping-cart.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "../headers/Header.css";
 import Web_Logo from "../../website_logo.png";
 import axios from "axios";
 import Button from "./Button";
+import { Grid } from "@material-ui/core";
+import SearchBox from "./SearchBox.js";
 
 const Header = () => {
   const state = useContext(GlobalState);
@@ -21,6 +23,8 @@ const Header = () => {
   const menuClassname = ["nav-menu-3", "nav-menu-5"];
 
   const checkMenuSize = isAdmin ? menuClassname[1] : menuClassname[0];
+
+  const location = useLocation();
 
   const showButton = () => {
     if (window.innerWidth <= 960) {
@@ -45,7 +49,7 @@ const Header = () => {
   const adminRouter = () => {
     return (
       <>
-        <li>
+        <li className="nav-item">
           <Link
             className="nav-items"
             to="/create_product"
@@ -55,7 +59,7 @@ const Header = () => {
             Create Product
           </Link>
         </li>
-        <li>
+        <li className="nav-item">
           <Link
             className="nav-items"
             to="/category"
@@ -79,7 +83,7 @@ const Header = () => {
   const loggedRouter = () => {
     return (
       <>
-        <li>
+        <li className="nav-item">
           <Link
             className="nav-items"
             to="/history"
@@ -89,7 +93,7 @@ const Header = () => {
             History
           </Link>
         </li>
-        <li>
+        <li className="nav-item">
           <Link
             className="nav-items"
             to="/products"
@@ -105,67 +109,100 @@ const Header = () => {
 
   return (
     <nav className="navbar">
-      <div className="navbar-container">
-        <Link to="/" className="shop-logo" onClick={() => setMenu(!menu)}>
-          {isAdmin ? "Admin" : "MamMam "}
-          {/* <img src={Web_Logo}></img> */}
-        </Link>
-
-        <div className="menu-icon" onClick={() => setMenu(!menu)}>
-          <i className={menu ? "fas fa-times" : "fas fa-bars"}></i>
-        </div>
-
-        <ul className={menu ? `${checkMenuSize} active ` : `${checkMenuSize}`}>
-          <li className="nav-item">
-            <Link
-              to="/products"
-              onClick={() => setMenu(false)}
-              className="nav-links"
-            >
-              {isAdmin ? "Products" : "Shopping"}
-            </Link>
-          </li>
-
-          {isAdmin && adminRouter()}
-
-          {isLogged ? (
-            loggedRouter()
-          ) : (
-            <li className="nav-item">
-              <Link
-                to="/login"
-                onClick={() => setMenu(false)}
-                className="nav-links-mobile"
-              >
-                Sign Up
-              </Link>
-            </li>
-          )}
-        </ul>
-
-        {button && (
-          <Button
-            buttonStyle="btn--outline"
-            isLogged={isLogged}
-            onClick={isLogged && onClickEvents}
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        alignItems="center"
+      >
+        <Grid item xs={2}>
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
           >
-            {!isLogged ? "SIGN UP" : "LOG OUT"}
-          </Button>
-        )}
-
-        {!isAdmin && (
-          <div className="cart-icon">
-            <span>{cart.length}</span>
-            <Link to="/cart">
-              <img
-                src={ShoppingCartIcon}
-                alt="shopping cart icon"
-                width="30px"
-              ></img>
+            <Link to="/" className="shop-logo" onClick={() => setMenu(!menu)}>
+              {isAdmin ? "Admin" : "MamMam "}
             </Link>
-          </div>
-        )}
-      </div>
+            <div className="menu-icon" onClick={() => setMenu(!menu)}>
+              <i className={menu ? "fas fa-times" : "fas fa-bars"}></i>
+            </div>
+          </Grid>
+        </Grid>
+        <Grid item xs={6}>
+          <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="center"
+          >
+            <ul
+              className={menu ? `${checkMenuSize} active ` : `${checkMenuSize}`}
+            >
+              <li className="nav-item">
+                <Link
+                  to="/products"
+                  onClick={() => setMenu(false)}
+                  className="nav-links"
+                >
+                  {isAdmin ? "Products" : "Shopping"}
+                </Link>
+              </li>
+
+              {isAdmin && adminRouter()}
+
+              {isLogged ? (
+                loggedRouter()
+              ) : (
+                <li className="nav-item">
+                  <Link
+                    to="/login"
+                    onClick={() => setMenu(false)}
+                    className="nav-links-mobile"
+                  >
+                    Sign Up
+                  </Link>
+                </li>
+              )}
+            </ul>
+          </Grid>
+        </Grid>
+        <Grid item xs={4}>
+          <Grid
+            container
+            direction="row"
+            justify="flex-end"
+            alignItems="center"
+          >
+            {button && (
+              <Button
+                buttonStyle="btn--outline"
+                isLogged={isLogged}
+                onClick={isLogged && onClickEvents}
+              >
+                {!isLogged ? "SIGN UP" : "LOG OUT"}
+              </Button>
+            )}
+
+            {!isAdmin && (
+              <div className="cart-icon">
+                <span>{cart.length}</span>
+                <Link to="/cart">
+                  <img
+                    src={ShoppingCartIcon}
+                    alt="shopping cart icon"
+                    width="30px"
+                  ></img>
+                </Link>
+              </div>
+            )}
+          </Grid>
+        </Grid>
+        <Grid item xs>
+          {location.pathname === "/products" && <SearchBox />}
+        </Grid>
+      </Grid>
     </nav>
   );
 };
