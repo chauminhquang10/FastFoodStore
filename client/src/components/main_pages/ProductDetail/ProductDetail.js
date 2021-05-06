@@ -4,9 +4,11 @@ import { GlobalState } from "../../../GlobalState";
 import "./ProductDetail.css";
 import ProductItem from "../Utils/productItem/ProductItem";
 
+import ReactImageMagnify from "react-image-magnify";
+
 import { motion } from "framer-motion";
 
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import Tags from "./Tags";
 
 const ProductDetail = () => {
   const params = useParams();
@@ -15,15 +17,37 @@ const ProductDetail = () => {
   const addToCart = state.userAPI.addToCart;
   const [productDetail, setProductDetail] = useState([]);
 
+  const [imageTest, setImageTest] = useState("");
+
   useEffect(() => {
     if (params.id) {
       products.forEach((product) => {
-        if (product._id === params.id) setProductDetail(product);
+        if (product._id === params.id) {
+          setProductDetail(product);
+          setImageTest(product.image.url);
+        }
       });
     }
   }, [params.id, products]);
 
+  //zoom image
+
+  const imageProps = {
+    smallImage: {
+      isFluidWidth: true,
+      src: imageTest,
+      alt: "product detail image",
+    },
+    largeImage: {
+      src: imageTest,
+      width: 550,
+      height: 600,
+    },
+    enlargedImageContainerStyle: { background: "#fff", zIndex: 9 },
+  };
+
   if (productDetail.length === 0) return null;
+
   return (
     <>
       <motion.div
@@ -32,15 +56,9 @@ const ProductDetail = () => {
         initial={{ opacity: 0 }}
       >
         <div className="detail">
-          {/* <TransformWrapper
-            defaultScale={1}
-            defaultPositionX={400}
-            defaultPositionY={450}
-          >
-            <TransformComponent> */}
-          <img src={productDetail.image.url} alt="product detail image"></img>
-          {/* </TransformComponent>
-          </TransformWrapper> */}
+          <ReactImageMagnify {...imageProps}></ReactImageMagnify>
+
+          {/* <img src={productDetail.image.url} alt="product detail image"></img> */}
 
           <div className="box-detail">
             <div className="row">
@@ -60,6 +78,9 @@ const ProductDetail = () => {
             >
               Buy Now
             </Link>
+            <div className="product-detail-tags">
+              <Tags productDetail={productDetail}></Tags>
+            </div>
           </div>
         </div>
 

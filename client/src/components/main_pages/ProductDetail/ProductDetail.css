@@ -49,3 +49,7 @@
   text-transform: uppercase;
   letter-spacing: 2px;
 }
+
+.product-detail-tags {
+  margin-top: 60px;
+}
