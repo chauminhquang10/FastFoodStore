@@ -4,20 +4,34 @@ import { GlobalState } from "../../../GlobalState";
 import "./ProductDetail.css";
 import ProductItem from "../Utils/productItem/ProductItem";
 
+import ProductItemStarRating from "../Utils/productItem/ProductItemStarRating/ProductItemStarRating";
+
 import ReactImageMagnify from "react-image-magnify";
 
 import { motion } from "framer-motion";
 
 import Tags from "./Tags";
 
+import Comments from "./Comments/Comments";
+
 const ProductDetail = () => {
   const params = useParams();
   const state = useContext(GlobalState);
+  const [categories] = state.categoriesAPI.categories;
+
   const [products] = state.productsAPI.products;
   const addToCart = state.userAPI.addToCart;
   const [productDetail, setProductDetail] = useState([]);
 
+  const [callback, setCallback] = state.productsAPI.callback;
+
   const [imageTest, setImageTest] = useState("");
+
+  //hiển thị thể loại của sản phẩm
+  const [category, setCategory] = useState([]);
+
+  //comments khách hàng
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     if (params.id) {
@@ -28,7 +42,17 @@ const ProductDetail = () => {
         }
       });
     }
-  }, [params.id, products]);
+  }, [params.id, products, callback]);
+
+  useEffect(() => {
+    if (productDetail) {
+      categories.forEach((category) => {
+        if (category._id === productDetail.category) {
+          setCategory(category);
+        }
+      });
+    }
+  }, [productDetail, categories]);
 
   //zoom image
 
@@ -63,12 +87,20 @@ const ProductDetail = () => {
           <div className="box-detail">
             <div className="row">
               <h2>{productDetail.title}</h2>
-              <h6>#{productDetail.product_id}</h6>
+              {/* <h6>#{productDetail.product_id}</h6> */}
             </div>
             <span>${productDetail.price}</span>
             <p>{productDetail.description}</p>
             <p>{productDetail.content}</p>
             <p>Sold: {productDetail.sold}</p>
+            <div className="customer-evaluation">
+              <ProductItemStarRating
+                rating={productDetail.star}
+              ></ProductItemStarRating>
+              <p>({comments.length} Customer's Evaluation)</p>
+            </div>
+            <p>Category: {category.name}</p>
+
             <Link
               to="/cart"
               className="cart"
@@ -79,7 +111,10 @@ const ProductDetail = () => {
               Buy Now
             </Link>
             <div className="product-detail-tags">
-              <Tags productDetail={productDetail}></Tags>
+              <Tags
+                productDetail={productDetail}
+                categoryName={category.name}
+              ></Tags>
             </div>
           </div>
         </div>
@@ -88,17 +123,19 @@ const ProductDetail = () => {
           <h2>Related Products</h2>
           <div className="products">
             {products.map((product) => {
-              return (
-                product.category === productDetail.category && (
-                  <ProductItem
-                    key={product._id}
-                    product={product}
-                  ></ProductItem>
-                )
-              );
+              return product.category === productDetail.category &&
+                product._id != productDetail._id ? (
+                <ProductItem key={product._id} product={product}></ProductItem>
+              ) : null;
             })}
           </div>
         </div>
+
+        <Comments
+          productDetail={productDetail}
+          comments={comments}
+          setComments={setComments}
+        ></Comments>
       </motion.div>
     </>
   );

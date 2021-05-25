@@ -234,6 +234,21 @@ const userController = {
       return res.status(500).json({ msg: error.message });
     }
   },
+  addToFavoriteList: async (req, res) => {
+    try {
+      const user = await Users.findById(req.user.id);
+      if (!user) return res.status(400).json({ msg: "User does not exist" });
+      await Users.findByIdAndUpdate(
+        { _id: req.user.id },
+        {
+          favoriteList: req.body.favoriteProducts,
+        }
+      );
+      return res.json({ msg: "Added to favorite list successfully !" });
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
+  },
   history: async (req, res) => {
     try {
       const history = await Payments.find({ user_id: req.user.id });
@@ -379,7 +394,8 @@ const createRefreshToken = (payload) => {
 };
 
 function validateEmail(email) {
-  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const re =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 }
 

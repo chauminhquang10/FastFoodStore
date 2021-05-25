@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Tags.css";
 
-const Tags = ({ productDetail }) => {
+const Tags = ({ productDetail, categoryName }) => {
   return (
     <div className="tags-container">
       <i className="fas fa-tags"></i>
@@ -10,7 +10,7 @@ const Tags = ({ productDetail }) => {
       <ul className="tags-list">
         <li>#{productDetail.product_id}</li>
         <li>#{productDetail.title}</li>
-        <li>#{productDetail.content}</li>
+        <li>#{categoryName}</li>
       </ul>
     </div>
   );

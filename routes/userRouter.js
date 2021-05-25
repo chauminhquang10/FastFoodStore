@@ -30,6 +30,12 @@ router.get(
 
 router.patch("/add_cart", authentication, userController.addcart);
 
+router.patch(
+  "/add_favoriteList",
+  authentication,
+  userController.addToFavoriteList
+);
+
 router.get("/history", authentication, userController.history);
 
 router.post("/activation", userController.activateEmail);

@@ -100,8 +100,6 @@ const Products = () => {
       animate={{ opacity: 1 }}
       initial={{ opacity: 0 }}
     >
-      <FiltersProducts></FiltersProducts>
-
       {isAdmin && (
         <div className="delete-all">
           <h6>Hiển thị: {currentProducts.length} kết quả</h6>

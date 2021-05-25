@@ -12,6 +12,8 @@ const Cart = () => {
 
   const [token] = state.token;
 
+  const [callback, setCallback] = state.productsAPI.callback;
+
   //tổng tiền khởi tạo bằng 0
   const [total, setTotal] = useState(0);
 
@@ -89,6 +91,7 @@ const Cart = () => {
 
     setCart([]);
     addToCart([]);
+    setCallback(!callback);
 
     alert("You have successfully placed an order.");
   };

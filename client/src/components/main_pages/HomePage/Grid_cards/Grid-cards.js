@@ -12,9 +12,7 @@ import grid5 from "../../../../images/grid5.jpg";
 import grid6 from "../../../../images/grid6.jpg";
 import grid7 from "../../../../images/grid7.jpg";
 
-import { SliderData } from "../Img-Slider/SliderData";
-
-import ImageSlider from "../Img-Slider/ImageSlider";
+import Slider from "../Img-Slider/Slider";
 
 function Grid_cards() {
   const [xemThem, setXemThem] = useState(
@@ -54,7 +52,7 @@ function Grid_cards() {
             xs
           >
             <ul className="grid_cards_image_only__items">
-              <ImageSlider slides={SliderData}></ImageSlider>
+              <Slider></Slider>
             </ul>
           </Grid>
         </Grid>
