@@ -1,7 +1,7 @@
 .product_card {
   max-width: 250px;
   overflow: hidden;
-  height: 470px;
+  height: 500px;
   padding: 15px;
   box-shadow: 0 0 15px #ddd;
   margin: 10px auto;
@@ -27,6 +27,11 @@
 
 .product-box span {
   color: crimson;
+}
+
+.product-box h6 {
+  margin-bottom: 12px;
+  font-weight: 700;
 }
 
 .product-box p {
@@ -68,4 +73,8 @@
   position: absolute;
   width: 25px;
   height: 25px;
+}
+
+.favorite__icon:hover {
+  cursor: pointer;
 }

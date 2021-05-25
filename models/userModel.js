@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema(
       default:
         "https://res.cloudinary.com/minh-quang-21-kg/image/upload/v1617765426/test/psgagi578loqhw21rm2z.jpg",
     },
+    favoriteList: {
+      type: Array,
+      default: [],
+    },
   },
   { timestamps: true }
 );

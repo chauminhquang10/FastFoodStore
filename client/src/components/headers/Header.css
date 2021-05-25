@@ -108,10 +108,12 @@
   transform: translateY(-10px);
 }
 
+.avatar {
+}
+
 /* Dropdown */
 .drop-nav {
   position: relative;
-  padding: 10px 0px;
 }
 
 .drop-nav a {

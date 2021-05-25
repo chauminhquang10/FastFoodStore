@@ -112,35 +112,51 @@ const Header = () => {
 
   const userLink = () => {
     return (
-      <li className="drop-nav">
-        <Link to="#" className="avatar">
-          <img src={user.avatar} alt="user avatar"></img>
-          {user.name}
-          <i className="fas fa-sort-down"></i>
-        </Link>
-        <ul className="dropdown">
-          <li>
-            <Link to="/profile">Profile</Link>
-          </li>
-          <li>
-            <Link to="/" onClick={onClickEvents}>
-              Log out
+      <Grid container>
+        <Grid container style={{ marginTop: "-2px" }}>
+          <li className="drop-nav">
+            <Link to="#" className="avatar">
+              <img
+                style={{ marginTop: "10px", marginRight: "5px" }}
+                src={user.avatar}
+                alt="user avatar"
+              ></img>
+              {user.name}
+              <i className="fas fa-sort-down"></i>
             </Link>
+            <ul
+              className="dropdown"
+              style={{
+                marginTop: "-13px",
+                marginLeft: "21px",
+                backgroundColor: "white",
+              }}
+            >
+              <li>
+                <Link to="/profile">Profile</Link>
+              </li>
+              <li>
+                <Link to="/" onClick={onClickEvents}>
+                  Log out
+                </Link>
+              </li>
+            </ul>
           </li>
-        </ul>
-      </li>
+        </Grid>
+      </Grid>
     );
   };
 
   return (
     <nav className="navbar">
       <Grid
+        style={{}}
         container
         direction="row"
         justify="space-between"
         alignItems="center"
       >
-        <Grid item xs={2}>
+        <Grid item xs>
           <Grid
             container
             direction="column"
@@ -155,7 +171,7 @@ const Header = () => {
             </div>
           </Grid>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={5}>
           <Grid
             container
             direction="row"
