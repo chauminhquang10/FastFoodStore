@@ -3,7 +3,7 @@ import { GlobalState } from "../../GlobalState";
 
 import ShoppingCartIcon from "./icon/shopping-cart.png";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 import "../headers/Header.css";
 import Web_Logo from "../../website_logo.png";
 import axios from "axios";
@@ -17,6 +17,9 @@ const Header = () => {
   const [user, setUser] = state.userAPI.user;
 
   const [cart] = state.userAPI.cart;
+
+  const [toggleShakingCart, setToggleShakingCart] =
+    state.userAPI.toggleShakingCart;
 
   const [menu, setMenu] = useState(false);
   const [button, setButton] = useState(true);
@@ -38,6 +41,13 @@ const Header = () => {
   }, []);
 
   window.addEventListener("resize", showButton);
+
+  // bỏ rung shopping cart icon sau 1 thoi gian
+  setTimeout(function () {
+    if (toggleShakingCart) {
+      setToggleShakingCart(false);
+    }
+  }, 1000);
 
   const logOutUser = async () => {
     await axios.get("/user/logout");
@@ -70,6 +80,16 @@ const Header = () => {
             Categories
           </Link>
         </li>
+        <li>
+          <Link
+            className="nav-items"
+            to="/discount"
+            onClick={() => setMenu(false)}
+            className="nav-links"
+          >
+            Discounts
+          </Link>
+        </li>
       </>
     );
   };
@@ -80,7 +100,6 @@ const Header = () => {
     logOutUser();
   };
 
-  console.log(menu);
   const loggedRouter = () => {
     return (
       <>
@@ -181,8 +200,8 @@ const Header = () => {
           </Button>
         )}
 
-        {!isAdmin && (
-          <div className="cart-icon">
+        {!isAdmin && isLogged && (
+          <div className={toggleShakingCart ? "cart-icon active" : "cart-icon"}>
             <span>{cart.length}</span>
             <Link to="/cart">
               <img

@@ -109,7 +109,7 @@ const Login = () => {
           cookiePolicy={"single_host_origin"}
         />
         <FacebookLogin
-          appId="310866944063959"
+          appId="577453733250676"
           autoLoad={false}
           fields="name,email,picture"
           callback={responseFacebook}

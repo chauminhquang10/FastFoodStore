@@ -49,3 +49,16 @@
   text-transform: uppercase;
   letter-spacing: 2px;
 }
+
+.product-detail-tags {
+  margin-top: 60px;
+}
+
+.customer-evaluation {
+  display: flex;
+  align-items: center;
+}
+
+.customer-evaluation p {
+  margin-left: 12px;
+}

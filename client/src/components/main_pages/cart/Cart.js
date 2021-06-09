@@ -6,13 +6,27 @@ import axios from "axios";
 
 import PaypalButton from "./PayPalButton";
 
+import moment from "moment";
+
 const Cart = () => {
   const state = useContext(GlobalState);
   const [cart, setCart] = state.userAPI.cart;
 
   const [token] = state.token;
 
-  //tổng tiền khởi tạo bằng 0
+  const [user, setUser] = state.userAPI.user;
+
+  const [callback, setCallback] = state.productsAPI.callback;
+
+  const [discounts, setDiscounts] = state.discountsAPI.discounts;
+
+  // discount chứa mã giảm giá
+  const [chosenDiscount, setChosenDiscount] = useState(null);
+
+  //hiển thị giá trị giảm giá
+  const [reduceDiscount, setReduceDiscount] = useState(0);
+
+  //tạm tổng tiền khởi tạo bằng 0
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
@@ -22,8 +36,27 @@ const Cart = () => {
       }, 0);
 
       setTotal(total);
+      checkValidDiscount(total);
     };
+    const checkValidDiscount = (total) => {
+      let currentDate = moment(new Date()).format("DD.MM.YYYY");
+      if (discounts) {
+        discounts.forEach((discount) => {
+          let discountExpireTime = moment(new Date(discount.expireTime)).format(
+            "DD.MM.YYYY"
+          );
 
+          if (currentDate <= discountExpireTime) {
+            if (total >= discount.minimumValue) {
+              if (reduceDiscount < discount.discountValue) {
+                setReduceDiscount(discount.discountValue);
+                setChosenDiscount(discount);
+              }
+            }
+          }
+        });
+      }
+    };
     getTotal();
   }, [cart]);
 
@@ -45,6 +78,8 @@ const Cart = () => {
       }
     });
     setCart([...cart]);
+    setReduceDiscount(0);
+    setChosenDiscount(null);
     addToCart(cart);
   };
 
@@ -56,6 +91,8 @@ const Cart = () => {
       }
     });
     setCart([...cart]);
+    setReduceDiscount(0);
+    setChosenDiscount(null);
     addToCart(cart); // việc thêm hàm addToCart này là để đồng bộ database
     // ví dụ như remove 1 sản phẩm thì nó mất khỏi (state) card  chứ k mất khỏi thuộc tính card của user trong database
     // card được dùng gián tiếp chứ k trực tiếp
@@ -73,6 +110,8 @@ const Cart = () => {
       });
     }
     setCart([...cart]);
+    setReduceDiscount(0);
+    setChosenDiscount(null);
     addToCart(cart);
   };
 
@@ -87,8 +126,33 @@ const Cart = () => {
       }
     );
 
+    // gửi mail confirm đơn hàng
+
+    const { email, name } = user;
+    const { country_code } = address;
+    var currentDate = new Date().toLocaleString();
+    var officialTotal = (total - (total * reduceDiscount) / 100).toFixed(0);
+
+    await axios.post(
+      "/user/confirmMail",
+      {
+        email,
+        name,
+        country_code,
+        paymentID,
+        cart,
+        currentDate,
+        total,
+        officialTotal,
+      },
+      {
+        headers: { Authorization: token },
+      }
+    );
+
     setCart([]);
     addToCart([]);
+    setCallback(!callback);
 
     alert("You have successfully placed an order.");
   };
@@ -125,7 +189,23 @@ const Cart = () => {
 
       <div className="total">
         <h3>Total: ${total}</h3>
-        <PaypalButton total={total} tranSuccess={tranSuccess}></PaypalButton>
+        <h3>Reduce Amount: ${((total * reduceDiscount) / 100).toFixed(0)}</h3>
+        <h3>
+          Official Total: ${(total - (total * reduceDiscount) / 100).toFixed(0)}
+        </h3>
+        <h3>
+          Reduce Percent:
+          {reduceDiscount !== 0
+            ? `${reduceDiscount}%`
+            : "Not qualified to apply discount!"}
+        </h3>
+        <h3>
+          Discount Code: {chosenDiscount ? chosenDiscount.name : "No discount!"}
+        </h3>
+        <PaypalButton
+          total={(total - (total * reduceDiscount) / 100).toFixed(0)}
+          tranSuccess={tranSuccess}
+        ></PaypalButton>
       </div>
     </div>
   );

@@ -4,26 +4,77 @@ import { GlobalState } from "../../../GlobalState";
 import "./ProductDetail.css";
 import ProductItem from "../Utils/productItem/ProductItem";
 
+import ProductItemStarRating from "../Utils/productItem/ProductItemStarRating/ProductItemStarRating";
+
+import ReactImageMagnify from "react-image-magnify";
+
 import { motion } from "framer-motion";
 
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import Tags from "./Tags";
+
+import Comments from "./Comments/Comments";
+
+import ReadMore from "./ReadMore";
 
 const ProductDetail = () => {
   const params = useParams();
   const state = useContext(GlobalState);
+  const [categories] = state.categoriesAPI.categories;
+
   const [products] = state.productsAPI.products;
   const addToCart = state.userAPI.addToCart;
+
   const [productDetail, setProductDetail] = useState([]);
+
+  const [callback, setCallback] = state.productsAPI.callback;
+
+  const [imageTest, setImageTest] = useState("");
+
+  //hiển thị thể loại của sản phẩm
+  const [category, setCategory] = useState([]);
+
+  //comments khách hàng
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     if (params.id) {
       products.forEach((product) => {
-        if (product._id === params.id) setProductDetail(product);
+        if (product._id === params.id) {
+          setProductDetail(product);
+          setImageTest(product.image.url);
+        }
       });
     }
-  }, [params.id, products]);
+  }, [params.id, products, callback]);
+
+  useEffect(() => {
+    if (productDetail) {
+      categories.forEach((category) => {
+        if (category._id === productDetail.category) {
+          setCategory(category);
+        }
+      });
+    }
+  }, [productDetail, categories]);
+
+  //zoom image
+
+  const imageProps = {
+    smallImage: {
+      isFluidWidth: true,
+      src: imageTest,
+      alt: "product detail image",
+    },
+    largeImage: {
+      src: imageTest,
+      width: 550,
+      height: 600,
+    },
+    enlargedImageContainerStyle: { background: "#fff", zIndex: 9 },
+  };
 
   if (productDetail.length === 0) return null;
+
   return (
     <>
       <motion.div
@@ -32,25 +83,27 @@ const ProductDetail = () => {
         initial={{ opacity: 0 }}
       >
         <div className="detail">
-          {/* <TransformWrapper
-            defaultScale={1}
-            defaultPositionX={400}
-            defaultPositionY={450}
-          >
-            <TransformComponent> */}
-          <img src={productDetail.image.url} alt="product detail image"></img>
-          {/* </TransformComponent>
-          </TransformWrapper> */}
+          <ReactImageMagnify {...imageProps}></ReactImageMagnify>
+
+          {/* <img src={productDetail.image.url} alt="product detail image"></img> */}
 
           <div className="box-detail">
             <div className="row">
               <h2>{productDetail.title}</h2>
-              <h6>#{productDetail.product_id}</h6>
+              {/* <h6>#{productDetail.product_id}</h6> */}
             </div>
             <span>${productDetail.price}</span>
-            <p>{productDetail.description}</p>
+            <ReadMore maxCharacter={100}>{productDetail.description}</ReadMore>
             <p>{productDetail.content}</p>
             <p>Sold: {productDetail.sold}</p>
+            <div className="customer-evaluation">
+              <ProductItemStarRating
+                rating={productDetail.star}
+              ></ProductItemStarRating>
+              <p>({comments.length} Customer's Evaluation)</p>
+            </div>
+            <p>Category: {category.name}</p>
+
             <Link
               to="/cart"
               className="cart"
@@ -60,6 +113,12 @@ const ProductDetail = () => {
             >
               Buy Now
             </Link>
+            <div className="product-detail-tags">
+              <Tags
+                productDetail={productDetail}
+                categoryName={category.name}
+              ></Tags>
+            </div>
           </div>
         </div>
 
@@ -67,17 +126,19 @@ const ProductDetail = () => {
           <h2>Related Products</h2>
           <div className="products">
             {products.map((product) => {
-              return (
-                product.category === productDetail.category && (
-                  <ProductItem
-                    key={product._id}
-                    product={product}
-                  ></ProductItem>
-                )
-              );
+              return product.category === productDetail.category &&
+                product._id != productDetail._id ? (
+                <ProductItem key={product._id} product={product}></ProductItem>
+              ) : null;
             })}
           </div>
         </div>
+
+        <Comments
+          productDetail={productDetail}
+          comments={comments}
+          setComments={setComments}
+        ></Comments>
       </motion.div>
     </>
   );

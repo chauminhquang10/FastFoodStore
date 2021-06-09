@@ -11,6 +11,10 @@ const UserAPI = (token) => {
   const [allUsers, setAllUsers] = useState([]);
   const [callback, setCallback] = useState(false);
 
+  const [favoriteProducts, setFavoriteProducts] = useState([]);
+
+  const [toggleShakingCart, setToggleShakingCart] = useState(false);
+
   useEffect(() => {
     if (token) {
       const getUser = async () => {
@@ -23,6 +27,7 @@ const UserAPI = (token) => {
           res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false);
 
           setCart(res.data.cart);
+          setFavoriteProducts(res.data.favoriteList);
         } catch (err) {
           alert(err.response.data.msg);
         }
@@ -57,7 +62,7 @@ const UserAPI = (token) => {
 
     if (check) {
       setCart([...cart, { ...product, quantity: 1 }]);
-
+      setToggleShakingCart(true);
       await axios.patch(
         "/user/add_cart",
         {
@@ -72,6 +77,32 @@ const UserAPI = (token) => {
     }
   };
 
+  const addToFavoriteList = async (product) => {
+    if (!isLogged)
+      return alert("Please login to add product into the favorite list");
+
+    //kiểm tra xem sản phẩm muốn thích đã có trong list chưa ?
+    const check = favoriteProducts.every((item) => {
+      return item._id !== product._id;
+    });
+
+    if (check) {
+      setFavoriteProducts([...favoriteProducts, { ...product }]);
+
+      await axios.patch(
+        "/user/add_favoriteList",
+        {
+          favoriteProducts: [...favoriteProducts, { ...product }],
+        },
+        {
+          headers: { Authorization: token },
+        }
+      );
+    } else {
+      alert("This product has been added to favorite list!");
+    }
+  };
+
   return {
     isLogged: [isLogged, setIsLogged],
     isAdmin: [isAdmin, setIsAdmin],
@@ -81,6 +112,9 @@ const UserAPI = (token) => {
     cart: [cart, setCart],
     history: [history, setHistory],
     callback: [callback, setCallback],
+    favoriteProducts: [favoriteProducts, setFavoriteProducts],
+    addToFavoriteList: addToFavoriteList,
+    toggleShakingCart: [toggleShakingCart, setToggleShakingCart],
   };
 };
 

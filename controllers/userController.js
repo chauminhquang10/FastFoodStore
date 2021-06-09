@@ -8,6 +8,8 @@ const jwt = require("jsonwebtoken");
 
 const sendMail = require("./sendMail");
 
+const sendConfirmMail = require("./sendConfirmMail");
+
 const { google } = require("googleapis");
 const { OAuth2 } = google.auth;
 
@@ -151,6 +153,34 @@ const userController = {
       return res.status(500).json({ msg: error.message });
     }
   },
+  sendConfirmMail: async (req, res) => {
+    try {
+      const {
+        email,
+        name,
+        country_code,
+        paymentID,
+        cart,
+        currentDate,
+        total,
+        officialTotal,
+      } = req.body;
+
+      sendConfirmMail(
+        email,
+        name,
+        country_code,
+        paymentID,
+        cart,
+        currentDate,
+        total,
+        officialTotal
+      );
+      res.json({ msg: "Send confirm email about the order successfully!" });
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
+  },
   resetPassword: async (req, res) => {
     try {
       const { password } = req.body;
@@ -230,6 +260,21 @@ const userController = {
         }
       );
       return res.json({ msg: "Added to cart successfully !" });
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
+  },
+  addToFavoriteList: async (req, res) => {
+    try {
+      const user = await Users.findById(req.user.id);
+      if (!user) return res.status(400).json({ msg: "User does not exist" });
+      await Users.findByIdAndUpdate(
+        { _id: req.user.id },
+        {
+          favoriteList: req.body.favoriteProducts,
+        }
+      );
+      return res.json({ msg: "Added to favorite list successfully !" });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
@@ -379,7 +424,8 @@ const createRefreshToken = (payload) => {
 };
 
 function validateEmail(email) {
-  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const re =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 }
 

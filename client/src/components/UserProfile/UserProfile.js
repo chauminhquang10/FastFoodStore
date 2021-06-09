@@ -10,6 +10,8 @@ import { GlobalState } from "../../GlobalState";
 
 import "./UserProfile.css";
 
+import UserActive from "./UserActive";
+
 const initialState = {
   name: "",
   password: "",
@@ -25,6 +27,9 @@ const UserProfile = () => {
   const [user, setUser] = state.userAPI.user;
   const [allUsers, setAllUsers] = state.userAPI.allUsers;
   const [callback, setCallback] = state.userAPI.callback;
+
+  const [favoriteProducts, setfavoriteProducts] =
+    state.userAPI.favoriteProducts;
 
   const [avatar, setAvatar] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -140,10 +145,40 @@ const UserProfile = () => {
           setLoading(false);
           setCallback(!callback);
         }
+      } else {
+        alert("You can't delete yourself");
       }
     } catch (error) {
       setData({ ...data, error: error.response.data.msg, success: "" });
     }
+  };
+
+  // custom hàm addtofavorite List lại vì nó chỉ thực hiện duy nhất là set cái list này lại thôi.
+  const addToFavoriteList = async (favoriteProducts) => {
+    await axios.patch(
+      "/user/add_favoriteList",
+      { favoriteProducts },
+      {
+        headers: { Authorization: token },
+      }
+    );
+  };
+
+  // xóa sản phẩm yêu thích khỏi list
+  const handleDeleteFavoriteProduct = (id) => {
+    if (
+      window.confirm(
+        "Are you sure to remove this product from your favorite list ?"
+      )
+    ) {
+      favoriteProducts.forEach((product, index) => {
+        if (product._id === id) {
+          favoriteProducts.splice(index, 1);
+        }
+      });
+    }
+    setfavoriteProducts([...favoriteProducts]);
+    addToFavoriteList(favoriteProducts);
   };
 
   return (
@@ -232,46 +267,86 @@ const UserProfile = () => {
         </div>
 
         <div className="col-right">
-          <h2>{isAdmin ? "Users" : "My Orders"}</h2>
-          <div style={{ overflowX: "auto" }}>
-            <table className="customers">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Admin</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {allUsers.map((user) => (
-                  <tr key={user._id}>
-                    <td>{user._id}</td>
-                    <td>{user.name}</td>
-                    <td>{user.email}</td>
-                    <td>
-                      {user.role === 1 ? (
-                        <i className="fas fa-check" title="Admin"></i>
-                      ) : (
-                        <i className="fas fa-times" title="User"></i>
-                      )}
-                    </td>
-                    <td>
-                      <Link to={`/edit_user/${user._id}`}>
-                        <i className="fas fa-user-edit" title="Edit"></i>
-                      </Link>
-                      <i
-                        className="far fa-trash-alt"
-                        title="Delete"
-                        onClick={() => handleDelete(user._id)}
-                      ></i>
-                    </td>
+          <h2>{isAdmin ? "Users" : "My Favorite"}</h2>
+
+          {isAdmin ? (
+            <div style={{ overflowX: "auto" }}>
+              <table className="customers">
+                <thead>
+                  <tr>
+                    <th>Status</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Admin</th>
+                    <th>Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {allUsers.map((user) => (
+                    <tr key={user._id}>
+                      <td>
+                        <UserActive userID={user._id}></UserActive>
+                      </td>
+                      <td>{user.name}</td>
+                      <td>{user.email}</td>
+                      <td>
+                        {user.role === 1 ? (
+                          <i className="fas fa-check" title="Admin"></i>
+                        ) : (
+                          <i className="fas fa-times" title="User"></i>
+                        )}
+                      </td>
+                      <td>
+                        <Link to={`/edit_user/${user._id}`}>
+                          <i className="fas fa-user-edit" title="Edit"></i>
+                        </Link>
+                        <i
+                          className="far fa-trash-alt "
+                          title="Delete"
+                          onClick={() => handleDelete(user._id)}
+                        ></i>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div style={{ overflowX: "auto" }}>
+              <table className="favorite__list">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {favoriteProducts.map((product) => (
+                    <tr key={product._id}>
+                      <td>
+                        <img src={product.image.url} alt="Product Image"></img>
+                      </td>
+                      <td>{product.title}</td>
+                      <td>{product.price}</td>
+                      <td>{product.description}</td>
+                      <td>
+                        <i
+                          className="far fa-trash-alt  "
+                          title="Delete"
+                          onClick={() =>
+                            handleDeleteFavoriteProduct(product._id)
+                          }
+                        ></i>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </div>
     </>

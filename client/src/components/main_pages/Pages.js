@@ -21,6 +21,8 @@ import UserProfile from "../UserProfile/UserProfile";
 
 import EditUser from "../UserProfile/EditUser";
 
+import Discounts from "./discounts/Discounts";
+
 import { AnimatePresence } from "framer-motion";
 
 const Pages = () => {
@@ -76,7 +78,11 @@ const Pages = () => {
             component={isAdmin ? EditUser : NotFound}
           ></Route>
 
-          <Route path="/cart" exact component={Cart}></Route>
+          <Route
+            path="/cart"
+            exact
+            component={isLogged ? Cart : NotFound}
+          ></Route>
 
           <Route
             path="/history"
@@ -106,6 +112,12 @@ const Pages = () => {
             path="/edit_product/:id"
             exact
             component={isAdmin ? CreateProduct : NotFound}
+          ></Route>
+
+          <Route
+            path="/discount"
+            exact
+            component={isAdmin ? Discounts : NotFound}
           ></Route>
 
           <Route path="*" exact component={NotFound}></Route>

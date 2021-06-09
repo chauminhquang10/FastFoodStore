@@ -42,6 +42,7 @@ const categoryController = {
     try {
       const { name } = req.body;
       await Category.findByIdAndUpdate({ _id: req.params.id }, { name });
+
       res.json({ msg: "Updated a category !" });
     } catch (error) {
       return res.status(500).json({ msg: error.message });

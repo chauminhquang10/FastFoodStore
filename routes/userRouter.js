@@ -30,6 +30,12 @@ router.get(
 
 router.patch("/add_cart", authentication, userController.addcart);
 
+router.patch(
+  "/add_favoriteList",
+  authentication,
+  userController.addToFavoriteList
+);
+
 router.get("/history", authentication, userController.history);
 
 router.post("/activation", userController.activateEmail);
@@ -37,6 +43,9 @@ router.post("/activation", userController.activateEmail);
 router.post("/forget", userController.forgetPassword);
 
 router.post("/reset", authentication, userController.resetPassword);
+
+//send mail confirm đơn hàng
+router.post("/confirmMail", authentication, userController.sendConfirmMail);
 
 router.patch("/update", authentication, userController.updateUser);
 

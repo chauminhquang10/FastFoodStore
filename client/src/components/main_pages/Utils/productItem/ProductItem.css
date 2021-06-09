@@ -29,6 +29,11 @@
   color: crimson;
 }
 
+.product-box h6 {
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
 .product-box p {
   width: 80%;
   display: -webkit-box;
@@ -68,4 +73,27 @@
   position: absolute;
   width: 25px;
   height: 25px;
+}
+
+.favorite__icon:hover {
+  cursor: pointer;
+}
+
+/* hot sale */
+
+.sm-title {
+  padding: 0.6rem 0;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 1rem;
+  background-color: #40c9a2;
+  color: #fff;
+  display: inline-block;
+  padding: 0.5rem;
+  position: absolute;
+  top: 0;
+  left: -8%;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  letter-spacing: 2px;
 }

@@ -12,7 +12,7 @@ import Footer from "./components/footer/Footer";
 
 import BackToTopBtn from "./components/Back-To-Top-Button/BackToTopBtn";
 
-import GoogleMap from "./GoogleMap";
+import ShopGoogleMap from "./GoogleMap";
 
 function App() {
   return (
@@ -23,8 +23,8 @@ function App() {
             <Header></Header>
             <Pages></Pages>
             <BackToTopBtn></BackToTopBtn>
+            <ShopGoogleMap></ShopGoogleMap>
             <Footer></Footer>
-            <GoogleMap></GoogleMap>
           </div>
         </Router>
       </DataProvider>
