@@ -58,20 +58,6 @@ const Header = () => {
     window.location.href = "/";
   };
 
-  const createNewConversation = async () => {
-    if (!isAdmin) {
-      const newConversation = {
-        senderID: user._id,
-        receiverID: "60866ea90567e02b1422693f", // admin nhận
-      };
-
-      await axios.post("/api/newConversation", newConversation, {
-        headers: { Authorization: token },
-      });
-    }
-    setMenu(false);
-  };
-
   const adminRouter = () => {
     return (
       <>
@@ -142,7 +128,7 @@ const Header = () => {
           <Link
             className="nav-items"
             to="/chat"
-            onClick={createNewConversation}
+            onClick={() => setMenu(false)}
             className="nav-links"
           >
             Chat
