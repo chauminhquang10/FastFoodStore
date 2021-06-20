@@ -30,6 +30,10 @@ app.use("/api", require("./routes/commentRouter"));
 
 app.use("/api", require("./routes/discountRouter"));
 
+app.use("/api", require("./routes/conversationRouter"));
+
+app.use("/api", require("./routes/messageRouter"));
+
 //Connect to the database with MongoDB Atlas
 const URI = process.env.MONGODB_URL;
 mongoose.connect(

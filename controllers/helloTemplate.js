@@ -47,8 +47,8 @@ const Hello = (
   <li>Address: ${country_code}</li>
   <li>Email: ${email}</li>
   <li>Total Products: ${cart.length}</li>
-  <li>Amount: <s> ${total}</s></li>
-  <li>Official Amount: ${officialTotal}</li>
+  <li>Amount: <s> ${total}$</s></li>
+  <li>Official Amount: ${officialTotal}$</li>
 </ul>
 <h3>Message</h3>
 <p style="text-align:justify;">Thank your for trusting us!</p>

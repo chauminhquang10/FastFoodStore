@@ -40,6 +40,7 @@ const Cart = () => {
     };
     const checkValidDiscount = (total) => {
       let currentDate = moment(new Date()).format("DD.MM.YYYY");
+
       if (discounts) {
         discounts.forEach((discount) => {
           let discountExpireTime = moment(new Date(discount.expireTime)).format(

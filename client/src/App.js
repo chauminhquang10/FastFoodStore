@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -14,6 +14,8 @@ import BackToTopBtn from "./components/Back-To-Top-Button/BackToTopBtn";
 
 import ShopGoogleMap from "./GoogleMap";
 
+// import Messenger from "./components/Messenger/Messenger";
+
 function App() {
   return (
     <>
@@ -23,7 +25,7 @@ function App() {
             <Header></Header>
             <Pages></Pages>
             <BackToTopBtn></BackToTopBtn>
-            <ShopGoogleMap></ShopGoogleMap>
+            {/* <Messenger></Messenger> */}
             <Footer></Footer>
           </div>
         </Router>

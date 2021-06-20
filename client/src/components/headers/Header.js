@@ -11,6 +11,7 @@ import Button from "./Button";
 
 const Header = () => {
   const state = useContext(GlobalState);
+  const [token] = state.token;
   const [isLogged, setIsLogged] = state.userAPI.isLogged;
   const [isAdmin, setIsAdmin] = state.userAPI.isAdmin;
 
@@ -55,6 +56,20 @@ const Header = () => {
     setIsLogged(false);
     setUser([]);
     window.location.href = "/";
+  };
+
+  const createNewConversation = async () => {
+    if (!isAdmin) {
+      const newConversation = {
+        senderID: user._id,
+        receiverID: "60866ea90567e02b1422693f", // admin nhận
+      };
+
+      await axios.post("/api/newConversation", newConversation, {
+        headers: { Authorization: token },
+      });
+    }
+    setMenu(false);
   };
 
   const adminRouter = () => {
@@ -121,6 +136,16 @@ const Header = () => {
             className="nav-links-mobile"
           >
             Log out
+          </Link>
+        </li>
+        <li>
+          <Link
+            className="nav-items"
+            to="/chat"
+            onClick={createNewConversation}
+            className="nav-links"
+          >
+            Chat
           </Link>
         </li>
       </>
@@ -201,7 +226,9 @@ const Header = () => {
         )}
 
         {!isAdmin && isLogged && (
-          <div className={toggleShakingCart ? "cart-icon active" : "cart-icon"}>
+          <div
+            className={toggleShakingCart ? "cart__icon active" : "cart__icon"}
+          >
             <span>{cart.length}</span>
             <Link to="/cart">
               <img

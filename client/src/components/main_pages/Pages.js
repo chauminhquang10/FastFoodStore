@@ -23,6 +23,8 @@ import EditUser from "../UserProfile/EditUser";
 
 import Discounts from "./discounts/Discounts";
 
+import Messenger from "../Messenger/Messenger";
+
 import { AnimatePresence } from "framer-motion";
 
 const Pages = () => {
@@ -118,6 +120,12 @@ const Pages = () => {
             path="/discount"
             exact
             component={isAdmin ? Discounts : NotFound}
+          ></Route>
+
+          <Route
+            path="/chat"
+            exact
+            component={isLogged ? Messenger : NotFound}
           ></Route>
 
           <Route path="*" exact component={NotFound}></Route>

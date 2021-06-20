@@ -9,6 +9,10 @@ import PopUp from "../discounts/Controls/PopUp";
 
 import Quotes from "./quotes/Quotes";
 
+import Testimonials from "./Testimonials";
+
+import Stats from "./Stats";
+
 import { motion } from "framer-motion";
 
 const HomePage = () => {
@@ -25,6 +29,8 @@ const HomePage = () => {
       <HeroSection></HeroSection>
       <Grid_cards></Grid_cards>
       <Cards></Cards>
+      <Testimonials></Testimonials>
+      <Stats></Stats>
     </motion.div>
   );
 };

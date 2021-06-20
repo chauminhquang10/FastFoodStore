@@ -29,6 +29,8 @@ import ConfirmDialog from "./Controls/ConfirmDialog";
 import CloseIcon from "@material-ui/icons/Close";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 
+import DiscountsStatus from "./DiscountsStatus";
+
 import { GlobalState } from "../../../GlobalState";
 
 import axios from "axios";
@@ -83,11 +85,6 @@ const Discounts = () => {
       disableSorting: true,
     },
     {
-      id: "_id",
-      label: "Discount ID",
-      disableSorting: true,
-    },
-    {
       id: "name",
       label: "Discount Coupon",
     },
@@ -102,6 +99,11 @@ const Discounts = () => {
     {
       id: "minimumValue",
       label: "Minimum Value",
+    },
+    {
+      id: "status",
+      label: "Status",
+      disableSorting: true,
     },
     {
       id: "actions",
@@ -297,11 +299,15 @@ const Discounts = () => {
             {recordsAfterPagingAndSorting().map((discount, index) => (
               <TableRow key={index}>
                 <TableCell>{index + 1}</TableCell>
-                <TableCell>{discount._id}</TableCell>
                 <TableCell>{discount.name}</TableCell>
                 <TableCell>{discount.discountValue}%</TableCell>
                 <TableCell>{discount.expireTime}</TableCell>
                 <TableCell>{discount.minimumValue}</TableCell>
+                <TableCell>
+                  <DiscountsStatus
+                    expireTime={discount.expireTime}
+                  ></DiscountsStatus>
+                </TableCell>
                 <TableCell>
                   <ActionButton
                     color="primary"
