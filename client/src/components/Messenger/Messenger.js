@@ -43,9 +43,6 @@ const Messenger = () => {
 
   const scrollRef = useRef();
 
-  const [conversationsCallback, setConversationCallback] =
-    state.conversationsCallback;
-
   //socket io dùng cho nhắn tin real time
   const socket = useRef();
 
