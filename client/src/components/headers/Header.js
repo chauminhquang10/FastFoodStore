@@ -10,6 +10,15 @@ import axios from "axios";
 import Button from "./Button";
 import { Grid } from "@material-ui/core";
 import SearchBox from "./SearchBox.js";
+import { makeStyles } from "@material-ui/core/styles";
+
+import {
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller,
+} from "react-scroll";
 
 const Header = () => {
   const state = useContext(GlobalState);
@@ -29,6 +38,37 @@ const Header = () => {
 
   const location = useLocation();
 
+  const [toggleShakingCart, setToggleShakingCart] =
+    state.userAPI.toggleShakingCart;
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      maxWidth: 345,
+    },
+    media: {
+      height: 140,
+    },
+    root: {
+      display: "flex",
+      "& > *": {
+        margin: theme.spacing(1),
+      },
+    },
+    small: {
+      width: theme.spacing(5),
+      height: theme.spacing(5),
+      position: "absolute",
+      top: "-3px",
+      left: "-7px",
+    },
+    large: {
+      width: theme.spacing(10),
+      height: theme.spacing(10),
+    },
+  }));
+
+  const classes = useStyles();
+
   const showButton = () => {
     if (window.innerWidth <= 960) {
       setButton(false);
@@ -36,6 +76,13 @@ const Header = () => {
       setButton(true);
     }
   };
+
+  // bỏ rung shopping cart icon sau 1 thoi gian
+  setTimeout(function () {
+    if (toggleShakingCart) {
+      setToggleShakingCart(false);
+    }
+  }, 1000);
 
   useEffect(() => {
     showButton();
@@ -54,7 +101,6 @@ const Header = () => {
       <>
         <li className="nav-item">
           <Link
-            className="nav-items"
             to="/create_product"
             onClick={() => setMenu(false)}
             className="nav-links"
@@ -64,12 +110,20 @@ const Header = () => {
         </li>
         <li className="nav-item">
           <Link
-            className="nav-items"
             to="/category"
             onClick={() => setMenu(false)}
             className="nav-links"
           >
             Categories
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link
+            to="/discount"
+            onClick={() => setMenu(false)}
+            className="nav-links"
+          >
+            Discount
           </Link>
         </li>
       </>
@@ -88,7 +142,6 @@ const Header = () => {
       <>
         <li className="nav-item">
           <Link
-            className="nav-items"
             to="/history"
             onClick={() => setMenu(false)}
             className="nav-links"
@@ -98,7 +151,6 @@ const Header = () => {
         </li>
         <li className="nav-item">
           <Link
-            className="nav-items"
             to="/products"
             onClick={onClickEvents}
             className="nav-links-mobile"
@@ -114,7 +166,7 @@ const Header = () => {
     return (
       <Grid container>
         <Grid container style={{ marginTop: "-2px" }}>
-          <li className="drop-nav">
+          <li style={{ listStyle: "none" }} className="drop-nav">
             <Link to="#" className="avatar">
               <img
                 style={{ marginTop: "10px", marginRight: "5px" }}
@@ -123,13 +175,17 @@ const Header = () => {
               ></img>
               {user.name}
               <i className="fas fa-sort-down"></i>
+              {/* <Avatar
+                alt="user avatar"
+                src={user.avatar}
+                className={classes.small}
+              /> */}
             </Link>
             <ul
               className="dropdown"
               style={{
-                marginTop: "-13px",
-                marginLeft: "21px",
-                backgroundColor: "white",
+                marginTop: "-12px",
+                marginLeft: "-21px",
               }}
             >
               <li>
@@ -147,69 +203,57 @@ const Header = () => {
     );
   };
 
+  const ToggleHome = () => {
+    scroll.scrollToTop();
+  };
+
   return (
     <nav className="navbar">
-      <Grid
-        style={{}}
-        container
-        direction="row"
-        justify="space-between"
-        alignItems="center"
-      >
-        <Grid item xs>
-          <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
+      <Grid container direction="row" justify="flex-start" alignItems="center">
+        <Grid item xs={1}>
+          <Link
+            to="/"
+            className="shop-logo"
+            onClick={(() => setMenu(!menu), ToggleHome)}
           >
-            <Link to="/" className="shop-logo" onClick={() => setMenu(!menu)}>
-              {isAdmin ? "Admin" : "MamMam "}
-            </Link>
-            <div className="menu-icon" onClick={() => setMenu(!menu)}>
-              <i className={menu ? "fas fa-times" : "fas fa-bars"}></i>
-            </div>
-          </Grid>
+            {isAdmin ? "Admin" : "MamMam "}
+          </Link>
+          <div className="menu-icon" onClick={() => setMenu(!menu)}>
+            <i className={menu ? "fas fa-times" : "fas fa-bars"}></i>
+          </div>
         </Grid>
-        <Grid item xs={5}>
-          <Grid
-            container
-            direction="row"
-            justify="flex-start"
-            alignItems="center"
+        <Grid item xs={8}>
+          <ul
+            className={menu ? `${checkMenuSize} active ` : `${checkMenuSize}`}
           >
-            <ul
-              className={menu ? `${checkMenuSize} active ` : `${checkMenuSize}`}
-            >
+            <li className="nav-item">
+              <Link
+                to="/products"
+                onClick={() => setMenu(false)}
+                className="nav-links"
+              >
+                {isAdmin ? "Products" : "Shopping"}
+              </Link>
+            </li>
+
+            {isAdmin && adminRouter()}
+
+            {isLogged ? (
+              loggedRouter()
+            ) : (
               <li className="nav-item">
                 <Link
-                  to="/products"
+                  to="/login"
                   onClick={() => setMenu(false)}
-                  className="nav-links"
+                  className="nav-links-mobile"
                 >
-                  {isAdmin ? "Products" : "Shopping"}
+                  Sign Up
                 </Link>
               </li>
-
-              {isAdmin && adminRouter()}
-
-              {isLogged ? (
-                loggedRouter()
-              ) : (
-                <li className="nav-item">
-                  <Link
-                    to="/login"
-                    onClick={() => setMenu(false)}
-                    className="nav-links-mobile"
-                  >
-                    Sign Up
-                  </Link>
-                </li>
-              )}
-            </ul>
-          </Grid>
+            )}
+          </ul>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={2}>
           <Grid
             container
             direction="row"
@@ -226,8 +270,10 @@ const Header = () => {
               </Button>
             )}
 
-            {!isAdmin && (
-              <div className="cart-icon">
+            {!isAdmin && isLogged && (
+              <div
+                className={toggleShakingCart ? "cart-icon active" : "cart-icon"}
+              >
                 <span>{cart.length}</span>
                 <Link to="/cart">
                   <img

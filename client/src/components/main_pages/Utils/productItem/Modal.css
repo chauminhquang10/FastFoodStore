@@ -11,8 +11,10 @@
 }
 
 .modal-wrapper {
-  width: 600px;
-  height: 400px;
+  /* width: 1880px;
+  height: 600px; */
+  width: 80%;
+  height: 80%;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;
@@ -21,6 +23,7 @@
   position: relative;
   border-radius: 10px;
   z-index: 100;
+  /* right: 500px; */
 }
 
 .modal-image {

@@ -31,7 +31,7 @@ const Slider = () => {
   return (
     <div className="slider-container">
       <div className="best-seller">
-        <i className="fa fa-gift fa-3x" aria-hidden="true"></i>
+        <i className="fa fa-gift fa-4x" aria-hidden="true"></i>
         <h1>BEST SELLER</h1>
       </div>
       <SliderContent activeIndex={activeIndex}></SliderContent>

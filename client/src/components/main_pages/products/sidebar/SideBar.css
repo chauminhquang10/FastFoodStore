@@ -1,8 +1,7 @@
 .sidebar {
-  width: 30%;
+  width: 20%;
   display: grid;
   grid-template-rows: repeat(auto-fill);
-
   margin-top: 40px;
   margin-left: 100px;
   height: 100%;

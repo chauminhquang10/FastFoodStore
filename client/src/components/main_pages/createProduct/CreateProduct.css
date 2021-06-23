@@ -73,14 +73,14 @@
   width: 100%;
   margin: 15px 0;
 }
-.create_product form input,
+/* .create_product form input,
 textarea {
   width: 100%;
   min-height: 40px;
   padding: 0 5px;
-}
+} */
 
-.create_product form button {
+/* .create_product form button {
   width: 200px;
   height: 40px;
   background: #555;
@@ -88,7 +88,7 @@ textarea {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 700;
-}
+} */
 
 .row label {
   margin-right: 10px;

@@ -1,14 +1,28 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
+import Notification from "../main_pages/discounts/Controls/Notification";
+
+import { GlobalState } from "../../GlobalState";
+
+import "./EditUser.css";
 import {
   showErrorMessage,
   showSuccessMessage,
 } from "../main_pages/Utils/Notification/Notification";
 
-import { GlobalState } from "../../GlobalState";
-
-import "./EditUser.css";
+//MUI
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+//MUI
 
 const EditUser = () => {
   const state = useContext(GlobalState);
@@ -48,11 +62,22 @@ const EditUser = () => {
           }
         );
         setCallback(!callback);
+        setNotify({
+          isOpen: true,
+          message: "Update Successfully !",
+          type: "success",
+        });
         setSuccess(res.data.msg);
         setNumber(0);
       }
     } catch (error) {
-      error.response.data.msg && setError(error.response.data.msg);
+      error.response.data.msg &&
+        setNotify({
+          isOpen: true,
+          message: "Activation Code is incorrect",
+          type: "error",
+        });
+      //setError(error.response.data.msg);
     }
   };
 
@@ -62,53 +87,167 @@ const EditUser = () => {
     setCheckAdmin(!checkAdmin);
     setNumber(number + 1);
   };
+  //MUI
+  const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      minHeight: "900px",
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: "100%", // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+    input: {
+      "&::placeholder": {
+        textOverflow: "ellipsis !important",
+        color: "black",
+      },
+    },
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  }));
 
+  const classes = useStyles();
+  //MUI
+
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
   return (
-    <div className="profile_page edit_user">
-      <div className="row">
-        <button onClick={() => history.goBack()} className="go_back">
-          <i className="fas fa-long-arrow-alt-left"></i> Go Back
-        </button>
-      </div>
-
-      <div className="col-left">
-        <h2>Edit User</h2>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
+    <Container component="main" maxWidth="xs">
+      <Notification notify={notify} setNotify={setNotify}></Notification>
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          User Info
+        </Typography>
+        <form className={classes.form} noValidate>
+          <TextField
+            InputProps={{
+              classes: { input: classes.input },
+            }}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="UserName"
+            label="User Name"
             type="text"
             name="name"
-            defaultValue={editUser.name}
             disabled
+            placeholder={editUser.name}
+            InputLabelProps={{ shrink: true }}
           />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
+          <TextField
+            InputProps={{
+              classes: { input: classes.input },
+            }}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="Email"
+            label="Email Address"
+            type="text"
             name="email"
-            defaultValue={editUser.email}
             disabled
+            placeholder={editUser.email}
+            disabled
+            InputLabelProps={{ shrink: true }}
           />
-        </div>
 
-        <div className="form-group">
-          <input
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
             type="checkbox"
             id="isAdmin"
             checked={checkAdmin}
             onChange={handleCheck}
-          ></input>
-          <label htmlFor="isAdmin">isAdmin</label>
-        </div>
-
-        <button onClick={handleUpdate}>Update</button>
-
-        {error && showErrorMessage(error)}
+            label="Is Admin"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={handleUpdate}
+          >
+            Update
+          </Button>
+          <Button
+            onClick={() => history.goBack()}
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="default"
+            style={{ marginTop: "10px" }}
+          >
+            Go Back
+          </Button>
+        </form>
         {success && showSuccessMessage(success)}
       </div>
-    </div>
+    </Container>
+    // <div className="profile_page edit_user">
+    //   <div className="row">
+    //     <button onClick={() => history.goBack()} className="go_back">
+    //       <i className="fas fa-long-arrow-alt-left"></i> Go Back
+    //     </button>
+    //   </div>
+
+    //   <div className="col-left">
+    //     <h2>Edit User</h2>
+    //     <div className="form-group">
+    //       <label htmlFor="name">Name</label>
+    //       <input
+    //         type="text"
+    //         name="name"
+    //         defaultValue={editUser.name}
+    //         disabled
+    //       />
+    //     </div>
+
+    //     <div className="form-group">
+    //       <label htmlFor="email">Email</label>
+    //       <input
+    //         type="email"
+    //         name="email"
+    //         defaultValue={editUser.email}
+    //         disabled
+    //       />
+    //     </div>
+
+    //     <div className="form-group">
+    //       <input
+    //         type="checkbox"
+    //         id="isAdmin"
+    //         checked={checkAdmin}
+    //         onChange={handleCheck}
+    //       ></input>
+    //       <label htmlFor="isAdmin">isAdmin</label>
+    //     </div>
+
+    //     <button onClick={handleUpdate}>Update</button>
+
+    //     {error && showErrorMessage(error)}
+    //     {success && showSuccessMessage(success)}
+    //   </div>
+    // </div>
   );
 };
 

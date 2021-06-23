@@ -1,4 +1,4 @@
-import food1 from "../../../../images/doan1.jpg";
+import food1 from "../../../../images/doan1.jpeg";
 import food2 from "../../../../images/doan2.jpg";
 import food3 from "../../../../images/doan3.jpg";
 import food4 from "../../../../images/doan4.jpg";

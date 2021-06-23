@@ -1,14 +1,12 @@
 .error-message {
-  background-color: rgb(214, 10, 10);
-  color: #fff9;
+  color: rgb(214, 10, 10);
   text-align: center;
   padding: 10px 0px;
   letter-spacing: 1.3px;
 }
 
 .success-message {
-  background-color: rgb(9, 158, 54);
-  color: #fff9;
+  color: rgb(9, 158, 54);
   text-align: center;
   padding: 10px 0px;
   letter-spacing: 1.3px;

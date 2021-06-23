@@ -29,7 +29,7 @@ const Cards = () => {
           <ul className="cards__items">
             <CardItem
               src={food_3}
-              text="Just sit down and take a bit of our harmburgers"
+              text="Just sit down and take a bit of our hamburgers"
               label="Enjoyable"
               path="/"
             />
@@ -41,7 +41,7 @@ const Cards = () => {
             />
             <CardItem
               src={food_5}
-              text="Not only cheap but also good to your health"
+              text="Not only cheap but also good for your health"
               label="Nutritious"
               path="/"
             />
