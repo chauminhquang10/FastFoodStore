@@ -32,7 +32,7 @@ const Slider = () => {
     <div className="slider-container">
       <div className="best-seller">
         <i className="fa fa-gift fa-3x" aria-hidden="true"></i>
-        <h1>BEST SELLER</h1>
+        <h1>Bán chạy nhất</h1>
       </div>
       <SliderContent activeIndex={activeIndex}></SliderContent>
       <Arrows prevSlide={prevSlide} nextSlide={nextSlide}></Arrows>
