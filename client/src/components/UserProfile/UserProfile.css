@@ -1,13 +1,8 @@
 .profile_page {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 100px;
 }
 
 .profile_page .col-left {
   max-width: 400px;
-  min-width: 300px;
   padding: 0px 10px;
   margin: auto;
 }
@@ -66,22 +61,21 @@
   margin: 10px 0;
 }
 
-.profile_page .col-left label {
+/* .profile_page .col-left label {
   display: block;
   margin-top: 5px;
-}
+} */
 
-.profile_page .col-left input {
+/* .profile_page .col-left input {
   width: 100%;
   height: 40px;
   margin: 5px 0;
   border: none;
   outline: none;
-  background: #fee;
   padding: 0 5px;
-}
+} */
 
-.profile_page .col-left button {
+/* .profile_page .col-left button {
   background: #333;
   color: #fff;
   padding: 10px 25px;
@@ -89,13 +83,12 @@
   padding-bottom: 30px;
   letter-spacing: 1.4px;
   margin: 10px 0;
-}
+} */
 
 /* Col right */
 .profile_page .col-right {
   padding: 0 10px;
   flex: 1;
-  min-width: 300px;
 }
 
 .profile_page .col-right h2 {

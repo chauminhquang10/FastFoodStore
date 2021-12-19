@@ -26,6 +26,10 @@ app.use("/api", require("./routes/paymentRouter"));
 
 app.use("/api", require("./routes/UploadAvatar"));
 
+app.use("/api", require("./routes/commentRouter"));
+
+app.use("/api", require("./routes/discountRouter"));
+
 //Connect to the database with MongoDB Atlas
 const URI = process.env.MONGODB_URL;
 mongoose.connect(

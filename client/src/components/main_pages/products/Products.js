@@ -23,7 +23,7 @@ const Products = () => {
   const [isCheck, setIsCheck] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(5);
+  const [productsPerPage, setProductsPerPage] = useState(8);
 
   const handleCheck = (id) => {
     products.forEach((product) => {

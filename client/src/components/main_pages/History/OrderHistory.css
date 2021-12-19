@@ -23,7 +23,7 @@ td {
   border-collapse: collapse;
 }
 
-th,
+.history-page table th,
 td {
   text-align: center;
   padding: 10px;

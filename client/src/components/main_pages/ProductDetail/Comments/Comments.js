@@ -11,7 +11,7 @@ import ReplyComment from "./ReplyComment";
 import StarRating from "../CommentStarRating/StarRating";
 const { TextArea } = Input;
 
-const Comments = ({ productDetail, comments, setComments }) => {
+const Comments = ({ productDetail, comments, setComments, isShow }) => {
   const state = useContext(GlobalState);
   const [token] = state.token;
 
@@ -97,13 +97,13 @@ const Comments = ({ productDetail, comments, setComments }) => {
 
   return (
     <div>
-      <h2>Comments</h2>
       <br />
-      <p>{comments.length} replies</p>
+      {isShow && <p>{comments.length} replies</p>}
       <hr />
 
       {/* Comments List */}
       {comments &&
+        isShow &&
         comments.map(
           (comment, index) =>
             !comment.responseTo && (

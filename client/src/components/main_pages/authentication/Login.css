@@ -1,8 +1,8 @@
 /* 
 CSS dùng chung cho cả login và register */
 
-.login-page {
-  max-width: 500px;
+/* .login-page {
+  max-width: 100%;
   border: 2px solid rgb(3, 165, 206);
   border-radius: 5px;
   padding: 40px;
@@ -43,7 +43,7 @@ CSS dùng chung cho cả login và register */
   color: orange;
   letter-spacing: 1.3px;
   text-transform: uppercase;
-}
+} */
 
 /* Facebook && Google  */
 
@@ -54,11 +54,12 @@ CSS dùng chung cho cả login và register */
 
 .login-page .social button {
   width: 100%;
-  margin: 10px 0;
-  height: 50px;
+  margin: 10px 10px;
+  height: 60px;
   font-size: 14px;
   font-weight: 200;
   text-transform: capitalize;
   letter-spacing: 1.3px;
   box-shadow: 0 2px 4px #777;
+  text-align: left;
 }

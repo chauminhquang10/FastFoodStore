@@ -5,6 +5,9 @@ import "./Modal.css";
 import { GlobalState } from "../../../../GlobalState";
 
 import { MdClose } from "react-icons/md";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import CardMedia from "@material-ui/core/CardMedia";
 
 const Modal = ({ product, toggleModal, setToggleModal }) => {
   const state = useContext(GlobalState);
@@ -29,7 +32,11 @@ const Modal = ({ product, toggleModal, setToggleModal }) => {
 
         <div className="modal-content">
           <h1>{product.title}</h1>
-          <p>{product.description}</p>
+          <Typography
+            style={{ padding: "10px", minWidth: "100px", minHeight: "200px" }}
+          >
+            {product.description}
+          </Typography>
           <button
             onClick={() => {
               addToCart(product);

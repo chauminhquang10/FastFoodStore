@@ -30,8 +30,8 @@ const Footer = () => {
           </>
         )}
         {!isLogged && (
-          <div className="input-areas">
-            <form>
+          <div>
+            <form style={{ position: "relative" }}>
               <input
                 className="footer-input"
                 type="email"
@@ -56,12 +56,9 @@ const Footer = () => {
             <Link to="/">Contact</Link>
             <Link to="/">Support</Link>
           </div>
-        </div>
-        <div className="footer-link-wrapper">
           <div class="footer-link-items">
             <h2>Videos</h2>
             <Link to="/">Submit Video</Link>
-
             <Link to="/">Agency</Link>
             <Link to="/">Influencer</Link>
           </div>
@@ -70,7 +67,6 @@ const Footer = () => {
             <Link to="/">Instagram</Link>
             <Link to="/">Facebook</Link>
             <Link to="/">Youtube</Link>
-            <Link to="/">Twitter</Link>
           </div>
         </div>
       </div>
