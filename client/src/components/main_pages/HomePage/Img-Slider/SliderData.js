@@ -14,22 +14,27 @@ export const SliderData = [
   },
   {
     title: "",
+
     description: "",
     img_url: food2,
   },
   {
     title: "",
     description: "",
+
     img_url: food3,
   },
   {
     title: "",
+
     description: "",
     img_url: food4,
   },
   {
     title: "",
+
     description: "",
+
     img_url: food5,
   },
 ];

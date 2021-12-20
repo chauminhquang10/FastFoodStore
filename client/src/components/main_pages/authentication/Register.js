@@ -85,6 +85,7 @@ const Register = () => {
 
     try {
       const { name, email, password } = user;
+
       const res = await axios.post("/user/register", { name, email, password });
 
       setUser({ ...user, error: "", success: res.data.msg });

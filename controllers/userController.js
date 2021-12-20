@@ -215,6 +215,28 @@ const userController = {
       return res.status(500).json({ msg: error.message });
     }
   },
+  findUserById: async (req, res) => {
+    try {
+      const user = await Users.findById(req.params.userID).select("-password");
+      if (!user) {
+        return res.status(400).json({ msg: "User does not exist" });
+      }
+      res.json(user);
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
+  },
+  getAnswerAdmin: async (req, res) => {
+    try {
+      const user = await Users.find({ email: "chauminhquang99@gmail.com" });
+      if (!user) {
+        return res.status(400).json({ msg: "User does not exist" });
+      }
+      res.json(user);
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
+  },
   getAllUserInfor: async (req, res) => {
     try {
       const users = await Users.find().select("-password");

@@ -28,27 +28,6 @@ import "./Checkout.css";
 import Divider from "@material-ui/core/Divider";
 
 const Checkout = () => {
-  const products = [
-    { name: "Product 1", desc: "A nice thing", price: "$9.99" },
-    { name: "Product 2", desc: "Another thing", price: "$3.45" },
-    { name: "Product 3", desc: "Something else", price: "$6.51" },
-    { name: "Product 4", desc: "Best thing of all", price: "$14.11" },
-    { name: "Shipping", desc: "", price: "Free" },
-  ];
-  const addresses = [
-    "1 Material-UI Drive",
-    "Reactville",
-    "Anytown",
-    "99999",
-    "USA",
-  ];
-  const payments = [
-    { name: "Card type", detail: "Visa" },
-    { name: "Card holder", detail: "Mr John Smith" },
-    { name: "Card number", detail: "xxxx-xxxx-xxxx-1234" },
-    { name: "Expiry date", detail: "04/2024" },
-  ];
-
   const useStyles = makeStyles((theme) => ({
     listItem: {
       padding: theme.spacing(1, 0),
@@ -146,52 +125,6 @@ const Checkout = () => {
     );
   };
 
-  // tăng giá trị số lượng của sản phẩm
-  const incrementEvent = (id) => {
-    cart.forEach((item) => {
-      if (item._id === id) {
-        item.quantity += 1;
-      }
-    });
-    setCart([...cart]);
-    setReduceDiscount(0);
-    setChosenDiscount(null);
-    addToCart(cart);
-  };
-
-  // giảm giá trị số lượng của sản phẩm
-  const decreamentEvent = (id) => {
-    cart.forEach((item) => {
-      if (item._id === id) {
-        item.quantity === 1 ? (item.quantity = 1) : (item.quantity -= 1);
-      }
-    });
-    setCart([...cart]);
-    setReduceDiscount(0);
-    setChosenDiscount(null);
-    addToCart(cart);
-    // việc thêm hàm addToCart này là để đồng bộ database
-    // ví dụ như remove 1 sản phẩm thì nó mất khỏi (state) card  chứ k mất khỏi thuộc tính card của user trong database
-    // card được dùng gián tiếp chứ k trực tiếp
-  };
-
-  // xóa sản phẩm khỏi giỏ hàng
-  const removeEvent = (id) => {
-    if (
-      window.confirm("Are you sure to remove this product from your cart ?")
-    ) {
-      cart.forEach((product, index) => {
-        if (product._id === id) {
-          cart.splice(index, 1);
-        }
-      });
-    }
-    setCart([...cart]);
-    setReduceDiscount(0);
-    setChosenDiscount(null);
-    addToCart(cart);
-  };
-
   const tranSuccess = async (payment) => {
     const { paymentID, address } = payment;
 
@@ -208,10 +141,19 @@ const Checkout = () => {
     const { email, name } = user;
     const { country_code } = address;
     var currentDate = new Date().toLocaleString();
-
+    var officialTotal = (total - (total * reduceDiscount) / 100).toFixed(0);
     await axios.post(
       "/user/confirmMail",
-      { email, name, country_code, paymentID, cart, currentDate },
+      {
+        email,
+        name,
+        country_code,
+        paymentID,
+        cart,
+        currentDate,
+        total,
+        officialTotal,
+      },
       {
         headers: { Authorization: token },
       }
@@ -319,135 +261,6 @@ const Checkout = () => {
         </React.Fragment>
       </Paper>
     </main>
-    // <div style={{ backgroundColor: "#f9f9f9" }}>
-    //   <h1 style={{ paddingTop: "5rem", fontSize: "60px" }}>Cart</h1>
-    //   <TableContainer style={{ backgroundColor: "#f9f9f9" }} component={Paper}>
-    //     <Table className={classes.table} aria-label="simple table">
-    //       <TableHead>
-    //         <TableRow>
-    //           <TableCell
-    //             style={{ borderRightColor: "#f9f9f9" }}
-    //             colSpan={2}
-    //           ></TableCell>
-    //           <TableCell style={{ borderRightColor: "#f9f9f9" }} align="center">
-    //             <Typography>Name</Typography>
-    //           </TableCell>
-    //           <TableCell style={{ borderRightColor: "#f9f9f9" }} align="center">
-    //             <Typography>Price</Typography>
-    //           </TableCell>
-    //           <TableCell style={{ borderRightColor: "#f9f9f9" }} align="center">
-    //             <Typography>Quantity</Typography>
-    //           </TableCell>
-    //           <TableCell align="center">
-    //             <Typography>Total</Typography>
-    //           </TableCell>
-    //         </TableRow>
-    //       </TableHead>
-    //       <TableBody>
-    //         {cart.map((product) => (
-    //           <TableRow key={product.name}>
-    //             <TableCell
-    //               style={{ borderRightColor: "#f9f9f9" }}
-    //               align="center"
-    //             >
-    //               <HighlightOffIcon
-    //                 fontSize="large"
-    //                 color="disabled"
-    //                 onClick={() => removeEvent(product._id)}
-    //               />
-    //             </TableCell>
-    //             <TableCell
-    //               style={{ borderRightColor: "#f9f9f9" }}
-    //               component="th"
-    //               scope="row"
-    //             >
-    //               <CardMedia
-    //                 className={classes.media}
-    //                 image={product.image.url}
-    //               />
-    //             </TableCell>
-    //             <TableCell
-    //               style={{ borderRightColor: "#f9f9f9" }}
-    //               align="center"
-    //             >
-    //               <Typography>{product.title}</Typography>
-    //             </TableCell>
-    //             <TableCell
-    //               style={{ borderRightColor: "#f9f9f9" }}
-    //               align="center"
-    //             >
-    //               <Typography>{product.price}&nbsp;$</Typography>
-    //             </TableCell>
-    //             <TableCell
-    //               width="20%"
-    //               align="center"
-    //               style={{ borderRightColor: "#f9f9f9" }}
-    //             >
-    //               <Typography>
-    //                 <i
-    //                   onClick={() => decreamentEvent(product._id)}
-    //                   class="fas fa-minus"
-    //                 ></i>
-    //                 <span>&nbsp;&nbsp;{product.quantity}&nbsp;&nbsp;</span>
-    //                 <i
-    //                   onClick={() => incrementEvent(product._id)}
-    //                   class="fas fa-plus"
-    //                 ></i>
-    //               </Typography>
-    //             </TableCell>
-    //             <TableCell align="center">
-    //               <Typography>
-    //                 {product.price * product.quantity}&nbsp;$
-    //               </Typography>
-    //             </TableCell>
-    //           </TableRow>
-    //         ))}
-    //       </TableBody>
-    //     </Table>
-    //   </TableContainer>
-    //   <TableContainer style={{ backgroundColor: "#f9f9f9" }} component={Paper}>
-    //     <Table className={classes.smalltable} aria-label="simple table">
-    //       <TableHead>
-    //         <TableRow>
-    //           <TableCell>Total</TableCell>
-    //         </TableRow>
-    //       </TableHead>
-    //       <TableBody>
-    //         <TableRow>
-    //           <TableCell align="left">
-    //             <Typography>Temporary Total: {total}$</Typography>
-    //           </TableCell>
-    //         </TableRow>
-    //         {reduceDiscount !== 0 && (
-    //           <TableRow>
-    //             <TableCell colSpan={6} style={{ justifyContent: "flex-end" }}>
-    //               <Typography>
-    //                 Reduce Amount:&nbsp;
-    //                 {((total * reduceDiscount) / 100).toFixed(0)}$
-    //               </Typography>
-    //             </TableCell>
-    //           </TableRow>
-    //         )}
-    //         <TableRow>
-    //           <TableCell align="left">
-    //             <Typography>
-    //               Official Total:&nbsp;
-    //               {(total - (total * reduceDiscount) / 100).toFixed(0)}$
-    //             </Typography>
-    //           </TableCell>
-    //         </TableRow>
-    //         <TableRow>
-    //           <TableCell align="center">
-    //             <Button fullWidth color="primary">
-    //               <Link to="/Checkout">Checkout</Link>
-    //             </Button>
-    //
-    //           </TableCell>
-    //         </TableRow>
-    //       </TableBody>
-    //     </Table>
-    //   </TableContainer>
-    // </div>
   );
 };
 

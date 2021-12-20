@@ -30,19 +30,20 @@
 
 .nav-menu-3 {
   display: grid;
-  grid-template-columns: repeat(3, auto);
-  grid-gap: 22px;
+  grid-template-columns: repeat(9, auto);
+  grid-gap: 15px;
   list-style: none;
   text-align: center;
   width: 30vw;
   justify-content: start;
-  margin-left: 300px;
+  margin-left: 120px;
   margin-right: 2rem;
 }
 
 .nav-menu-5 {
   display: grid;
   grid-template-columns: repeat(9, auto);
+  grid-gap: 15px;
   list-style: none;
   text-align: center;
   width: 60vw;
@@ -191,6 +192,13 @@
     margin: 0;
     padding: 0;
   }
+  .nav-menu-3.active {
+    background: #242222;
+    left: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+  }
 
   .nav-menu-5 {
     display: flex;
@@ -204,14 +212,6 @@
     transition: all 0.5s ease;
     margin: 0;
     padding: 0;
-  }
-
-  .nav-menu-3.active {
-    background: #242222;
-    left: 0;
-    opacity: 1;
-    transition: all 0.5s ease;
-    z-index: 1;
   }
 
   .nav-menu-5.active {

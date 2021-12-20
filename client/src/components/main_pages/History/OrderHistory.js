@@ -195,7 +195,14 @@ const OrderHistory = () => {
       getHistory();
     }
   }, [token, isAdmin, setHistory]);
-
+  if (history.length === 0) {
+    return (
+      <div style={{ minHeight: "900px", backgroundColor: "#f9f9f9" }}>
+        {" "}
+        <h1 style={{ paddingTop: "5rem", fontSize: "60px" }}>History Emty</h1>
+      </div>
+    );
+  }
   return (
     <motion.div
       exit={{ opacity: 0 }}

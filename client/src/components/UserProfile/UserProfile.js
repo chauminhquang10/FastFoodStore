@@ -76,6 +76,7 @@ const UserProfile = () => {
       paddingRight: "10px",
     },
   }));
+  const classes = useStyles();
   const [openPopUp, setOpenPopUp] = useState(false);
 
   //Notification
@@ -243,8 +244,6 @@ const UserProfile = () => {
   });
   //
 
-  const classes = useStyles();
-
   const state = useContext(GlobalState);
   const [token] = state.token;
   const [isAdmin, setIsAdmin] = state.userAPI.isAdmin;
@@ -330,6 +329,7 @@ const UserProfile = () => {
           headers: { Authorization: token },
         }
       );
+      setCallback(!callback);
       console.log(token);
 
       setNotify({
@@ -370,13 +370,19 @@ const UserProfile = () => {
         }
       );
       setData({ ...data, error: "", success: "Updated Successfully" });
+      setNotify({
+        isOpen: true,
+        message: "Update Successfully",
+        type: "success",
+      });
     } catch (error) {
       setData({ ...data, error: error.response.data.msg, success: "" });
     }
   };
 
   //Update all info by combining two func into one
-  const handleUpdate = () => {
+  const handleUpdate = (e) => {
+    e.preventDefault();
     if (name || avatar) updateUser();
     if (password) updateUserPassword();
   };
@@ -437,7 +443,6 @@ const UserProfile = () => {
     <>
       <div>
         <Notification notify={notify} setNotify={setNotify}></Notification>
-        {loading && <h3>Loading...</h3>}
       </div>
       <div className="profile_page">
         <Paper className={classes.pageContent}>

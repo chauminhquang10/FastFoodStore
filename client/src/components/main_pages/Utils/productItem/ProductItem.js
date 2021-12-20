@@ -28,8 +28,17 @@ const ProductItem = ({ product, isAdmin, deleteProduct, handleCheck }) => {
   const useStyles = makeStyles((theme) => ({
     root: {
       width: "240px",
+      height: "470px",
       margin: theme.spacing(1),
       position: "relative",
+      transition: "all 1s ease",
+    },
+    root2: {
+      width: "240px",
+      height: "fit-content",
+      margin: theme.spacing(1),
+      position: "relative",
+      transition: "all 1s ease",
     },
     media: {
       height: 0,
@@ -95,7 +104,7 @@ const ProductItem = ({ product, isAdmin, deleteProduct, handleCheck }) => {
 
   return (
     <>
-      <Card className={classes.root}>
+      <Card className={!expanded ? classes.root : classes.root2}>
         {product.sold > 10 && (
           <div className="off-info">
             <h2 className="sm-title">
@@ -187,56 +196,6 @@ const ProductItem = ({ product, isAdmin, deleteProduct, handleCheck }) => {
           )}
         </CardActions>
       </Card>
-      {/* <div className="product_card">
-        {isAdmin && (
-          <input
-            type="checkbox"
-            checked={product.checked}
-            onChange={() => handleCheck(product._id)}
-          ></input>
-        )}
-        <img src={product.image.url} alt="product image"></img>
-        <div className="product-box">
-          <h2 title={product.title}>{product.title}</h2>
-          <i
-            className={
-              toggleFavorite
-                ? "fas fa-heart fa-2x favorite__icon"
-                : "far fa-heart fa-2x favorite__icon"
-            }
-            onClick={() => {
-              addToFavoriteList(product);
-              setToggleFavorite(true);
-            }}
-          ></i>
-
-          <span>${product.price}</span>
-          <p>{product.description}</p>
-          <h6> {category.name}</h6>
-        </div>
-
-        {product.sold > 10 && (
-          <div className="off-info">
-            <h2 className="sm-title">Hot Sale</h2>
-          </div>
-        )}
-
-        <ProductItemStarRating rating={product.star}></ProductItemStarRating>
-
-        <Buttons
-          product={product}
-          deleteProduct={deleteProduct}
-          toggleModal={toggleModal}
-          setToggleModal={setToggleModal}
-        ></Buttons>
-      </div>
-      {toggleModal && (
-        <Modal
-          product={product}
-          toggleModal={toggleModal}
-          setToggleModal={setToggleModal}
-        ></Modal>
-      )} */}
     </>
   );
 };

@@ -25,9 +25,12 @@ import EditUser from "../UserProfile/EditUser";
 
 import Discounts from "./discounts/Discounts";
 
-// import aboutus from "./about us/AboutUs";
+import aboutus from "./about us/AboutUs";
+
+import Messenger from "../Messenger/Messenger";
 
 import { AnimatePresence } from "framer-motion";
+import AboutUs from "./about us/AboutUs";
 
 const Pages = () => {
   const state = useContext(GlobalState);
@@ -58,6 +61,8 @@ const Pages = () => {
             component={ActivationEmail}
           ></Route>
 
+          <Route path="/chat" exact component={Messenger}></Route>
+
           <Route
             path="/forgot_password"
             exact
@@ -74,6 +79,12 @@ const Pages = () => {
             path="/profile"
             exact
             component={isLogged ? UserProfile : NotFound}
+          ></Route>
+
+          <Route
+            path="/aboutus"
+            exact
+            component={isLogged ? AboutUs : NotFound}
           ></Route>
 
           <Route

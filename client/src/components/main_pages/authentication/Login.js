@@ -98,7 +98,7 @@ const Login = () => {
       });
 
       setUser({ ...user, error: "", success: res.data.msg });
-      window.location.to = "/";
+      window.location.href = "/";
     } catch (error) {
       error.response.data.msg &&
         setUser({ ...user, error: error.response.data.msg, success: "" });
@@ -114,7 +114,7 @@ const Login = () => {
         userID,
       });
       setUser({ ...user, error: "", success: res.data.msg });
-      window.location.to = "/";
+      window.location.href = "/";
     } catch (error) {
       error.response.data.msg &&
         setUser({ ...user, error: error.response.data.msg, success: "" });
@@ -143,7 +143,7 @@ const Login = () => {
         >
           <div className={classes.paper}>
             <Typography component="h1" variant="h5">
-              Sign in
+              SIGN IN
             </Typography>
             <Notification notify={notify} setNotify={setNotify}></Notification>
             <form className={classes.form} noValidate>
@@ -193,11 +193,7 @@ const Login = () => {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link
-                    style={{ textDecoration: "underline" }}
-                    to="/register"
-                    variant="body2"
-                  >
+                  <Link to="/register" variant="body2">
                     Don't have an account? Sign Up
                   </Link>
                 </Grid>

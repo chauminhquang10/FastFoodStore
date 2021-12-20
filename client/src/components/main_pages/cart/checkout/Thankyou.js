@@ -145,19 +145,8 @@ const Thankyou = () => {
                   borderBottom: "inherit",
                 }}
               >
-                <Typography variant="p6">Create Date:</Typography>
+                <Typography variant="p6">Order Date:</Typography>
                 <Typography>{new Date(date).toLocaleDateString()}</Typography>
-              </TableCell>
-              <TableCell
-                style={{
-                  borderTop: "inherit",
-                  borderBottom: "inherit",
-                }}
-              >
-                <Typography variant="p6">Total:</Typography>
-                <Typography>
-                  {(total - (total * reduceDiscount) / 100).toFixed(0)}$
-                </Typography>
               </TableCell>
               <TableCell
                 style={{
@@ -170,23 +159,24 @@ const Thankyou = () => {
               </TableCell>
             </TableRow>
           </Table>
-
-          <Button
-            style={{
-              marginTop: "2rem",
-              marginLeft: "auto",
-              marginRight: "auto",
-              width: "400px",
-            }}
-            variant="contained"
-            color="primary"
-            size="large"
-            startIcon={<ShoppingCartIcon fontSize="large"></ShoppingCartIcon>}
-          >
-            <Typography> Continue Shopping</Typography>
-          </Button>
+          <Link to="/products">
+            <Button
+              style={{
+                marginTop: "2rem",
+                marginLeft: "auto",
+                marginRight: "auto",
+                width: "400px",
+              }}
+              variant="contained"
+              color="primary"
+              size="large"
+              startIcon={<ShoppingCartIcon fontSize="large"></ShoppingCartIcon>}
+            >
+              <Typography> Continue Shopping</Typography>
+            </Button>
+          </Link>
         </Grid>
-        <Grid item xs={6}>
+        {/* <Grid item xs={6}>
           <main className={classes.layout}>
             <Paper className={classes.paper}>
               <React.Fragment>
@@ -228,7 +218,7 @@ const Thankyou = () => {
               </React.Fragment>
             </Paper>
           </main>
-        </Grid>
+        </Grid> */}
       </Grid>
     </Paper>
   );

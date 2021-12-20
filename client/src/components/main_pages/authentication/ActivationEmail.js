@@ -45,7 +45,7 @@ const ActivationEmail = () => {
   });
 
   return (
-    <div className="active_page">
+    <div className="active_page" style={{ minHeight: "600px" }}>
       <Notification notify={notify} setNotify={setNotify}></Notification>
     </div>
   );

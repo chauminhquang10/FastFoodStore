@@ -74,7 +74,7 @@ const CreateProduct = () => {
   const state = useContext(GlobalState);
   const [product, setProduct] = useState(initState);
   const [categories] = state.categoriesAPI.categories;
-  const [image, setImage] = useState(false);
+  const [image, setImage] = useState("false");
   const [loading, setLoading] = useState(false);
   const [isAdmin] = state.userAPI.isAdmin;
   const [token] = state.token;
@@ -190,7 +190,7 @@ const CreateProduct = () => {
       setCallback(!callback);
       setImage(false);
       setProduct(initState);
-      history.push("/");
+      history.push("/products");
     } catch (error) {
       return alert(error.response.data.msg);
     }
@@ -322,7 +322,7 @@ const CreateProduct = () => {
                   )}
                 /> */}
                 <div className="row">
-                  <label>Category: </label>
+                  <label htmlFor="categories">Categories: </label>
                   <select
                     name="category"
                     value={product.category}
@@ -330,7 +330,9 @@ const CreateProduct = () => {
                   >
                     <option value="">Please select a category</option>
                     {categories.map((category) => (
-                      <option>{category.name}</option>
+                      <option value={category._id} key={category._id}>
+                        {category.name}
+                      </option>
                     ))}
                   </select>
                 </div>

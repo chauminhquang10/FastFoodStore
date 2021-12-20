@@ -198,7 +198,6 @@ const Cart = () => {
   if (cart.length === 0) {
     return (
       <div style={{ minHeight: "900px", backgroundColor: "#f9f9f9" }}>
-        {" "}
         <h1 style={{ paddingTop: "5rem", fontSize: "60px" }}>Cart Emty</h1>
       </div>
     );
@@ -206,30 +205,6 @@ const Cart = () => {
 
   return (
     <div style={{ backgroundColor: "#f9f9f9" }}>
-      {/* {cart.map((product) => (
-        <div className="detail cart" key={product._id}>
-          <img src={product.image.url} alt="" className="cart_item_img" />
-
-          <div className="box-detail">
-            <h2>{product.title}</h2>
-            <h3>$ {product.price * product.quantity}</h3>
-            <p>{product.description}</p>
-            <p>{product.content}</p>
-            <div className="amount">
-              <button onClick={() => decreamentEvent(product._id)}> - </button>
-              <span>{product.quantity}</span>
-              <button onClick={() => incrementEvent(product._id)}> + </button>
-            </div>
-            <div
-              className="detele-cart-item"
-              onClick={() => removeEvent(product._id)}
-            >
-              X
-            </div>
-          </div>
-        </div>
-      ))}
-       */}
       <h1 style={{ paddingTop: "5rem", fontSize: "60px" }}>Cart</h1>
       <TableContainer style={{ backgroundColor: "#f9f9f9" }} component={Paper}>
         <Table className={classes.table} aria-label="simple table">
@@ -315,29 +290,6 @@ const Cart = () => {
                 </TableCell>
               </TableRow>
             ))}
-            {/* <TableRow>
-              <TableCell colSpan={6} style={{ justifyContent: "flex-end" }}>
-                {reduceDiscount !== 0 && (
-                  <Typography>
-                    Reduce Amount
-                    {((total * reduceDiscount) / 100).toFixed(0)}$
-                  </Typography>
-                )}
-                <Typography></Typography>
-                <Typography>
-                  Reduce Percent:
-                  {reduceDiscount !== 0
-                    ? `${reduceDiscount}%`
-                    : " Not qualified to apply discount!"}
-                </Typography>
-                {reduceDiscount !== 0 && (
-                  <Typography>
-                    Discount Code:{" "}
-                    {chosenDiscount ? chosenDiscount.name : "No discount!"}
-                  </Typography>
-                )}
-              </TableCell>
-            </TableRow> */}
           </TableBody>
         </Table>
       </TableContainer>
@@ -395,26 +347,6 @@ const Cart = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <div className="total">
-        <h3>Total: ${total}</h3>
-        <h3>Reduce Amount: ${((total * reduceDiscount) / 100).toFixed(0)}</h3>
-        <h3>
-          Official Total: ${(total - (total * reduceDiscount) / 100).toFixed(0)}
-        </h3>
-        <h3>
-          Reduce Percent:
-          {reduceDiscount !== 0
-            ? `${reduceDiscount}%`
-            : "Not qualified to apply discount!"}
-        </h3>
-        <h3>
-          Discount Code: {chosenDiscount ? chosenDiscount.name : "No discount!"}
-        </h3>
-        <PaypalButton
-          total={(total - (total * reduceDiscount) / 100).toFixed(0)}
-          tranSuccess={tranSuccess}
-        ></PaypalButton>
-      </div> */}
     </div>
   );
 };
