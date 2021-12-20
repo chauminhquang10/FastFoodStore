@@ -144,11 +144,11 @@ const ProductDetail = () => {
   const imageProps = {
     smallImage: {
       isFluidWidth: true,
-      src: img,
+      src: imageTest,
       alt: "product detail image",
     },
     largeImage: {
-      src: img,
+      src: imageTest,
       width: 1920,
       height: 1080,
     },
@@ -195,7 +195,6 @@ const ProductDetail = () => {
                     {...imageProps}
                   ></ReactImageMagnify>
                 </Grid>
-
                 <Grid item xs>
                   <Typography
                     style={{ textTransform: "capitalize", marginBottom: "2%" }}

@@ -25,7 +25,6 @@ function App() {
             <Header></Header>
             <Pages></Pages>
             <BackToTopBtn></BackToTopBtn>
-            <ShopGoogleMap></ShopGoogleMap>
             <Footer></Footer>
           </div>
         </Router>

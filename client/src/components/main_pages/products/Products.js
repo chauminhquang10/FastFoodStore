@@ -6,7 +6,7 @@ import Loading from "../Utils/Loading/Loading";
 import axios from "axios";
 import FiltersProducts from "./FilterProducts";
 import LoadMore from "./LoadMore";
-
+import background from "./fast-food.jpg";
 import swal from "sweetalert";
 import Pagination from "./Pagination";
 
@@ -24,6 +24,8 @@ const Products = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(8);
+  const [productsPrice, setProductsPrice] = useState("0");
+  const [isProductsPriceLower, setIsProductsPriceLower] = useState(false);
 
   const handleCheck = (id) => {
     products.forEach((product) => {
@@ -74,7 +76,7 @@ const Products = () => {
 
   if (isLoading)
     return (
-      <div>
+      <div style={{ minHeight: "700px" }}>
         <Loading></Loading>
       </div>
     );
@@ -100,6 +102,9 @@ const Products = () => {
       animate={{ opacity: 1 }}
       initial={{ opacity: 0 }}
     >
+      {/* <div
+        style={{ backgroundImage: `url('${background}')`, objectFit: "fill" }}
+      > */}
       {isAdmin && (
         <div className="delete-all">
           <h6>Hiển thị: {currentProducts.length} kết quả</h6>
@@ -108,19 +113,27 @@ const Products = () => {
           <button onClick={deleteAll}>Delete All</button>
         </div>
       )}
-      <div className="both-container">
-        <SideBar></SideBar>
+      <div className="both-container" style={{ minHeight: "700px" }}>
+        <SideBar
+          setProductsPrice={setProductsPrice}
+          setIsProductsPriceLower={setIsProductsPriceLower}
+        ></SideBar>
         <div className="products">
           {currentProducts.map((product) => {
-            return (
-              <ProductItem
-                key={product._id}
-                product={product}
-                isAdmin={isAdmin}
-                deleteProduct={deleteProduct}
-                handleCheck={handleCheck}
-              ></ProductItem>
-            );
+            if (
+              !isProductsPriceLower
+                ? product.price >= productsPrice
+                : product.price <= productsPrice
+            )
+              return (
+                <ProductItem
+                  key={product._id}
+                  product={product}
+                  isAdmin={isAdmin}
+                  deleteProduct={deleteProduct}
+                  handleCheck={handleCheck}
+                ></ProductItem>
+              );
           })}
         </div>
       </div>
@@ -132,6 +145,7 @@ const Products = () => {
 
       {/* <LoadMore></LoadMore> */}
       {products.length === 0 && <Loading></Loading>}
+      {/* </div> */}
     </motion.div>
   );
 };

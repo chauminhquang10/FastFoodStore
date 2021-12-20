@@ -6,28 +6,28 @@ import food5 from "../../../../images/doan5.jpg";
 
 export const SliderData = [
   {
-    title: "Fisrt Slide",
-    description: "Food 1 Delicious",
+    title: "",
+    description: "Delicious",
     img_url: food1,
   },
   {
-    title: "Second Slide",
-    description: "Food 2 Delicious",
+    title: "",
+    description: "Delicious",
     img_url: food2,
   },
   {
     title: "Third Slide",
-    description: "Food 3 Delicious",
+    description: "Delicious",
     img_url: food3,
   },
   {
-    title: "Fourth Slide",
-    description: "Food 4 Delicious",
+    title: "",
+    description: "Delicious",
     img_url: food4,
   },
   {
-    title: "Fifth Slide",
-    description: "Food 5 Delicious",
+    title: "",
+    description: "Delicious",
     img_url: food5,
   },
 ];

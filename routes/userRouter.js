@@ -21,6 +21,12 @@ router.get("/logout", userController.logout);
 
 router.get("/information", authentication, userController.getUser);
 
+//tìm user theo id
+router.get("/findUser/:userID", authentication, userController.findUserById);
+
+//tìm admin trả lời cho customer
+router.get("/findAnswerAdmin", authentication, userController.getAnswerAdmin);
+
 router.get(
   "/all_information",
   authentication,
