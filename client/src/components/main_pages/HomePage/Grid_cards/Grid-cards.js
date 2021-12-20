@@ -5,11 +5,11 @@ import Grid_CardItem from "./Grid_CardItem";
 import Grid_CardItem_Image_only from "./Grid_CardItem_Image_only";
 import Grid from "@material-ui/core/Grid";
 import grid1 from "../../../../images/grid1.jpg";
-import grid2 from "../../../../images/grid2.jpg";
-import grid3 from "../../../../images/grid3.jpg";
-import grid4 from "../../../../images/grid4.jpg";
-import grid5 from "../../../../images/grid5.jpg";
-import grid6 from "../../../../images/grid6.jpg";
+import grid2 from "../../../../images/Potato.jpg";
+import grid3 from "../../../../images/fruits.jpg";
+import grid4 from "../../../../images/milk.jpg";
+import grid5 from "../../../../images/meat.jpg";
+import grid6 from "../../../../images/eggs.jpg";
 import grid7 from "../../../../images/grid7.jpg";
 
 import Slider from "../Img-Slider/Slider";
@@ -83,17 +83,17 @@ function Grid_cards() {
         <Grid alignItems="center" direction="row" container spacing={0}>
           <Grid item xs>
             <ul onClick={() => handlerClick(2)} className="cards__items">
-              <Grid_CardItem src={grid3} label="Read More" />
+              <Grid_CardItem src={grid3} label="Đọc thêm" />
             </ul>
           </Grid>
           <Grid item xs={4}>
             <ul onClick={() => handlerClick(1)} className="cards__items">
-              <Grid_CardItem src={grid4} label="Read More" />
+              <Grid_CardItem src={grid4} label="Đọc thêm" />
             </ul>
           </Grid>
           <Grid item xs>
             <ul onClick={() => handlerClick(3)} className="cards__items">
-              <Grid_CardItem src={grid6} label="Read More" url={xemThem} />
+              <Grid_CardItem src={grid6} label="Đọc thêm" url={xemThem} />
             </ul>
           </Grid>
         </Grid>

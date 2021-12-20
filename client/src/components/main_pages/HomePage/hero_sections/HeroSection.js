@@ -10,8 +10,8 @@ const HeroSection = () => {
     <>
       <div className="hero-container">
         <video src={intro_video} autoPlay loop muted />
-        <h1>FOOD HEAVEN</h1>
-        <p>What are you waiting for?</p>
+        <h1>Thiên đường nông sản</h1>
+        <p>Bạn còn mong chờ điều gì?</p>
         <div className="hero-btns">
           <Button
             isLogged={isLogged}
@@ -19,7 +19,9 @@ const HeroSection = () => {
             buttonStyle="btn--outline"
             buttonSize="btn--large"
           >
-            ORDER NOW !
+
+            Đặt Hàng !
+
           </Button>
           <Button
             isLogged={isLogged}
@@ -27,7 +29,9 @@ const HeroSection = () => {
             buttonStyle="btn--primary"
             buttonSize="btn--large"
           >
-            GO SHOPPING <i className="far fa-play-circle"></i>
+
+            Mua Ngay <i className="far fa-play-circle"></i>
+
           </Button>
         </div>
       </div>
