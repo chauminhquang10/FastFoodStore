@@ -56,7 +56,7 @@ const Buttons = ({ product, deleteProduct, toggleModal, setToggleModal }) => {
                 variant="contained"
                 color="secondary"
               >
-                Buy
+                Mua
               </Button>
             </Link>
             <Link
@@ -69,7 +69,7 @@ const Buttons = ({ product, deleteProduct, toggleModal, setToggleModal }) => {
                 variant="contained"
                 color="action"
               >
-                View
+                Xem
               </Button>
             </Link>
           </>

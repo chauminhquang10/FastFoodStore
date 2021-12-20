@@ -215,16 +215,16 @@ const Cart = () => {
                 colSpan={2}
               ></TableCell>
               <TableCell style={{ borderRightColor: "#f9f9f9" }} align="center">
-                <Typography>Name</Typography>
+                <Typography>Tên sản phẩm</Typography>
               </TableCell>
               <TableCell style={{ borderRightColor: "#f9f9f9" }} align="center">
-                <Typography>Price</Typography>
+                <Typography>Giá</Typography>
               </TableCell>
               <TableCell style={{ borderRightColor: "#f9f9f9" }} align="center">
-                <Typography>Quantity</Typography>
+                <Typography>Số lượng</Typography>
               </TableCell>
               <TableCell align="center">
-                <Typography>Total</Typography>
+                <Typography>Tổng tiền</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -261,7 +261,7 @@ const Cart = () => {
                   style={{ borderRightColor: "#f9f9f9" }}
                   align="center"
                 >
-                  <Typography>{product.price}&nbsp;$</Typography>
+                  <Typography>{product.price}.000 vnđ</Typography>
                 </TableCell>
                 <TableCell
                   width="20%"
@@ -285,7 +285,7 @@ const Cart = () => {
                 </TableCell>
                 <TableCell align="center">
                   <Typography>
-                    {product.price * product.quantity}&nbsp;$
+                    {product.price * product.quantity}.000 vnđ
                   </Typography>
                 </TableCell>
               </TableRow>
@@ -297,21 +297,21 @@ const Cart = () => {
         <Table className={classes.smalltable} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Total</TableCell>
+              <TableCell>Thông tin hóa đơn</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             <TableRow>
               <TableCell align="left">
-                <Typography>Temporary Total: {total}$</Typography>
+                <Typography>Tạm tính: {total}.000 vnđ</Typography>
               </TableCell>
             </TableRow>
             {reduceDiscount !== 0 && (
               <TableRow>
                 <TableCell colSpan={6} style={{ justifyContent: "flex-end" }}>
                   <Typography>
-                    Reduce Amount:&nbsp;
-                    {((total * reduceDiscount) / 100).toFixed(0)}$
+                    Giảm giá:&nbsp;
+                    {((total * reduceDiscount) / 100).toFixed(0)}.000 vnđ
                   </Typography>
                 </TableCell>
               </TableRow>
@@ -319,8 +319,8 @@ const Cart = () => {
             <TableRow>
               <TableCell align="left">
                 <Typography>
-                  Official Total:&nbsp;
-                  {(total - (total * reduceDiscount) / 100).toFixed(0)}$
+                  Giá hóa đơn:&nbsp;
+                  {(total - (total * reduceDiscount) / 100).toFixed(0)}.000 vnđ
                 </Typography>
               </TableCell>
             </TableRow>

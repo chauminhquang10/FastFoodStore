@@ -118,10 +118,10 @@ const Thankyou = () => {
       <Grid container>
         <Grid item xs={6} style={{ position: "relative" }}>
           <Typography variant="h5" gutterBottom>
-            Thank You For Your Order
+            Cảm ơn bạn đã đặt hàng
           </Typography>
           <Typography variant="p6" gutterBottom>
-            A notification mail has been sent to your email address:&nbsp;
+            Một hóa đơn chi tiết đã được gửi đến email của bạn:&nbsp;
           </Typography>
           <Typography variant="p6" gutterBottom>
             {user.email}
@@ -145,7 +145,7 @@ const Thankyou = () => {
                   borderBottom: "inherit",
                 }}
               >
-                <Typography variant="p6">Order Date:</Typography>
+                <Typography variant="p6">Ngày đặt hàng:</Typography>
                 <Typography>{new Date(date).toLocaleDateString()}</Typography>
               </TableCell>
               <TableCell
@@ -154,7 +154,7 @@ const Thankyou = () => {
                   borderBottom: "inherit",
                 }}
               >
-                <Typography variant="p6">Payment Method:</Typography>
+                <Typography variant="p6">Phương thức thanh toán:</Typography>
                 <Typography>PayPal</Typography>
               </TableCell>
             </TableRow>
@@ -172,53 +172,10 @@ const Thankyou = () => {
               size="large"
               startIcon={<ShoppingCartIcon fontSize="large"></ShoppingCartIcon>}
             >
-              <Typography> Continue Shopping</Typography>
+              <Typography>Tiếp tục mua hàng</Typography>
             </Button>
           </Link>
         </Grid>
-        {/* <Grid item xs={6}>
-          <main className={classes.layout}>
-            <Paper className={classes.paper}>
-              <React.Fragment>
-                <Typography variant="h6" gutterBottom>
-                  Order summary
-                </Typography>
-                <List disablePadding>
-                  {cart.map((product) => (
-                    <ListItem className={classes.listItem} key={product.title}>
-                      <ListItemText
-                        // style={{ textTransform: "capitalize" }}
-                        primary={product.title + " x " + product.quantity}
-                      />
-                      <Typography variant="body2">
-                        {product.price * product.quantity}$
-                      </Typography>
-                    </ListItem>
-                  ))}
-                  <Divider />
-                  <ListItem className={classes.listItem}>
-                    <ListItemText primary="Total" />
-                    <Typography className="Line" text variant="subtitle1">
-                      {total}$
-                    </Typography>
-                  </ListItem>
-                  <ListItem className={classes.listItem}>
-                    <ListItemText />
-                    <Typography
-                      className={classes.total}
-                      text
-                      variant="subtitle1"
-                    >
-                      {(total - (total * reduceDiscount) / 100).toFixed(0)}
-                      $&nbsp;(-
-                      {reduceDiscount}%)
-                    </Typography>
-                  </ListItem>
-                </List>
-              </React.Fragment>
-            </Paper>
-          </main>
-        </Grid> */}
       </Grid>
     </Paper>
   );

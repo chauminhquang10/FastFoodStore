@@ -75,51 +75,51 @@ const OrderDetail = () => {
   const addressHeadCells = [
     {
       id: "name",
-      label: "Name",
+      label: "Tên Khách Hàng",
       disableSorting: true,
     },
     {
       id: "address",
-      label: "Address",
+      label: "Địa chỉ",
       disableSorting: true,
     },
     {
       id: "postalcode",
-      label: "Postal Code",
+      label: "Mã Bưu Điện",
       disableSorting: true,
     },
     {
       id: "countrycode",
-      label: "Country Code",
+      label: "Mã Quốc Gia",
       disableSorting: true,
     },
   ];
   const productHeadCells = [
     {
       id: "index",
-      label: "Index",
+      label: "Stt",
       disableSorting: true,
     },
     {
       id: "title",
-      label: "Title",
+      label: "Tên sản phẩm",
     },
     {
       id: "image",
-      label: "Image",
+      label: "Ảnh Minh Họa",
       disableSorting: true,
     },
     {
       id: "quantity",
-      label: "Quantity",
+      label: "Số Lượng",
     },
     {
       id: "postalcode",
-      label: "Price",
+      label: "Giá",
     },
     {
       id: "countrycode",
-      label: "Total",
+      label: "Tổng",
     },
   ];
 
@@ -228,7 +228,7 @@ const OrderDetail = () => {
           <TableHead>
             <TableRow>
               <TableCell style={{ color: "white" }} colSpan={7}>
-                Shipment Detail
+                Chi tiết vận chuyển
               </TableCell>
             </TableRow>
             <TableRow>
@@ -279,7 +279,7 @@ const OrderDetail = () => {
           <TableHead>
             <TableRow>
               <TableCell style={{ color: "white" }} colSpan={7}>
-                Payment Table
+                Bảng thanh toán
               </TableCell>
             </TableRow>
             <TableRow>
@@ -313,7 +313,15 @@ const OrderDetail = () => {
                 <TableCell align="center">{index + 1}</TableCell>
                 <TableCell align="center">{product.title}</TableCell>
                 <TableCell>
-                  <img src={product.image.url} alt="Product Image"></img>
+                  <img
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      objectfit: "cover",
+                    }}
+                    src={product.image.url}
+                    alt="Product Image"
+                  ></img>
                 </TableCell>
                 <TableCell align="center">{product.quantity}</TableCell>
                 <TableCell align="center">{product.price}</TableCell>

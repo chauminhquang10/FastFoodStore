@@ -34,7 +34,7 @@ class APIfeatures {
   }
   paginating() {
     const page = this.queryString.page * 1 || 1; // số thứ tự của page muốn truy cập chứ k phải tổng số pages muốn chia
-    const limit = this.queryString.limit * 1 || 9; // limit là giới hạn số documentations muốn lấy tính từ đầu
+    const limit = 30; // limit là giới hạn số documentations muốn lấy tính từ đầu
     const skip = (page - 1) * limit; // skip là bỏ qua số documentations tính từ đầu
     this.query = this.query.skip(skip).limit(limit); // page -1 là vì số thứ tự đc đếm như mảng tính từ 0
 

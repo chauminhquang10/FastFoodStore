@@ -161,7 +161,7 @@ const ProductItem = ({ product, isAdmin, deleteProduct, handleCheck }) => {
             variant="h5"
             component="h4"
           >
-            ${product.price}
+            {product.price}.000 vnđ
           </Typography>
           <Typography variant="h7">{category.name}</Typography>
           <Collapse in={expanded} timeout="auto" unmountOnExit>

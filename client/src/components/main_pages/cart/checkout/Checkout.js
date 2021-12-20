@@ -180,7 +180,7 @@ const Checkout = () => {
       <Paper className={classes.paper}>
         <React.Fragment>
           <Typography variant="h6" gutterBottom>
-            Order summary
+            Tóm tắt hóa đơn
           </Typography>
           <List disablePadding>
             {cart.map((product) => (
@@ -190,7 +190,7 @@ const Checkout = () => {
                   primary={product.title + " x " + product.quantity}
                 />
                 <Typography variant="body2">
-                  {product.price * product.quantity}$
+                  {product.price * product.quantity}.000 vnđ
                 </Typography>
               </ListItem>
             ))}
@@ -198,13 +198,13 @@ const Checkout = () => {
             <ListItem className={classes.listItem}>
               <ListItemText primary="Total" />
               <Typography className="Line" text variant="subtitle1">
-                {total}$
+                {total}.000 vnđ
               </Typography>
             </ListItem>
             <ListItem className={classes.listItem}>
               <ListItemText />
               <Typography className={classes.total} text variant="subtitle1">
-                {(total - (total * reduceDiscount) / 100).toFixed(0)}$(-
+                {(total - (total * reduceDiscount) / 100).toFixed(0)}.000 vnđ(-
                 {reduceDiscount}%)
               </Typography>
             </ListItem>
@@ -212,19 +212,19 @@ const Checkout = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <Typography variant="h6" gutterBottom className={classes.title}>
-                Shipping
+                Địa chỉ giao hàng
               </Typography>
               <Typography gutterBottom>{user.name}</Typography>
               <Typography gutterBottom>{user.email}</Typography>
             </Grid>
             <Grid item container direction="column" xs={12} sm={6}>
               <Typography variant="h6" gutterBottom className={classes.title}>
-                Payment details
+                Chi tiết thanh toán
               </Typography>
               <Grid container>
                 <React.Fragment>
                   <Grid item xs={6}>
-                    <Typography>Payment Type</Typography>
+                    <Typography>Hình thức thanh toán</Typography>
                   </Grid>
                   <Grid item xs={6}>
                     <Typography>PayPal</Typography>
@@ -234,7 +234,7 @@ const Checkout = () => {
                     item
                     xs={6}
                   >
-                    <Typography>Create Date</Typography>
+                    <Typography>Ngày lập</Typography>
                   </Grid>
                   <Grid
                     style={{ marginBottom: "5%", paddingTop: "4px" }}

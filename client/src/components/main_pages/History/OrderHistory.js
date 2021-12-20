@@ -76,20 +76,20 @@ const OrderHistory = () => {
   const headCells = [
     {
       id: "index",
-      label: "Index",
+      label: "Stt",
       disableSorting: true,
     },
     {
       id: "paymentID",
-      label: "Payment ID",
+      label: "ID",
     },
     {
       id: "createdAt",
-      label: "Created Date",
+      label: "Ngày lập",
     },
     {
       id: "actions",
-      label: "Detail",
+      label: "Chi tiết",
       colSpan: 4,
       disableSorting: true,
     },
@@ -228,7 +228,7 @@ const OrderHistory = () => {
           <TableHead>
             <TableRow>
               <TableCell style={{ color: "white" }} colSpan={7}>
-                Payment Table
+                Bảng hóa đơn
               </TableCell>
             </TableRow>
             <TableRow>
