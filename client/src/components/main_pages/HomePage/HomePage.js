@@ -57,8 +57,8 @@ const HomePage = () => {
       <HeroSection></HeroSection>
       <Grid_cards></Grid_cards>
       <Cards></Cards>
-      <Testimonials></Testimonials>
-      <Stats></Stats>
+      {/* <Testimonials></Testimonials>
+      <Stats></Stats> */}
     </motion.div>
   );
 };

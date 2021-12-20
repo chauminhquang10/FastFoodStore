@@ -85,7 +85,7 @@ const SideBar = ({ setProductsPrice, setIsProductsPriceLower }) => {
             }
             onClick={handleOnClick}
           >
-            All Products
+            Tất cả sản phẩm
           </button>
           {categories.map((category) => (
             <button

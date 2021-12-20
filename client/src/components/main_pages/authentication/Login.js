@@ -143,7 +143,7 @@ const Login = () => {
         >
           <div className={classes.paper}>
             <Typography component="h1" variant="h5">
-              SIGN IN
+              ĐĂNG NHẬP
             </Typography>
             <Notification notify={notify} setNotify={setNotify}></Notification>
             <form className={classes.form} noValidate>
@@ -153,7 +153,7 @@ const Login = () => {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Địa chỉ email"
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -166,7 +166,7 @@ const Login = () => {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Mật khẩu"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -184,17 +184,17 @@ const Login = () => {
                 color="primary"
                 className={classes.submit}
               >
-                Sign In
+                Đăng nhập
               </Button>
               <Grid container>
                 <Grid item xs>
                   <Link to="/forgot_password" variant="body2">
-                    Forgot password?
+                    Quên mật khẩu ?
                   </Link>
                 </Grid>
                 <Grid item>
                   <Link to="/register" variant="body2">
-                    Don't have an account? Sign Up
+                    Chưa có tài khoản? Đăng Kí
                   </Link>
                 </Grid>
                 <Grid container>

@@ -92,8 +92,6 @@ const Header = () => {
 
   const classes = useStyles();
 
-  
-
   // bỏ rung shopping cart icon sau 1 thoi gian
   setTimeout(function () {
     if (toggleShakingCart) {
@@ -131,7 +129,7 @@ const Header = () => {
             }}
             className="nav-links"
           >
-            Create Product
+            Tạo Sản Phẩm
           </Link>
         </li>
         <li className="nav-item">
@@ -143,7 +141,7 @@ const Header = () => {
             }}
             className="nav-links"
           >
-            Categories
+            Quản Lí Loại Sản Phẩm
           </Link>
         </li>
         <li className="nav-item">
@@ -155,7 +153,7 @@ const Header = () => {
             }}
             className="nav-links"
           >
-            Discount
+            Giảm Giá
           </Link>
         </li>
       </>
@@ -185,7 +183,7 @@ const Header = () => {
             }}
             className="nav-links"
           >
-            History
+            Lịch Sử
           </Link>
         </li>
         {!isAdmin && (
@@ -198,23 +196,11 @@ const Header = () => {
               }}
               className="nav-links"
             >
-              About Us
+              Liên Hệ
             </Link>
           </li>
         )}
-        <li>
-          <Link
-            className="nav-items"
-            to="/chat"
-            onClick={() => {
-              setMenu(false);
-              ToggleHome();
-            }}
-            className="nav-links"
-          >
-            Chat
-          </Link>
-        </li>
+
         {!button && (
           <li>
             <Link
@@ -313,7 +299,7 @@ const Header = () => {
                 startIcon={<ExitToAppIcon></ExitToAppIcon>}
                 variant="outlined"
               >
-                Log Out
+                Đăng Xuất
               </ButtonUI>
             </Link>
           </Grid>
@@ -350,7 +336,7 @@ const Header = () => {
                 onClick={() => setMenu(false)}
                 className="nav-links"
               >
-                {isAdmin ? "Products" : "Shopping"}
+                {isAdmin ? "Danh Sách Sản Phẩm" : "Mua Sắm"}
               </Link>
             </li>
 
@@ -365,7 +351,7 @@ const Header = () => {
                   onClick={() => setMenu(false)}
                   className="nav-links-mobile"
                 >
-                  Sign Up
+                  Đăng Kí
                 </Link>
               </li>
             )}
@@ -387,7 +373,7 @@ const Header = () => {
                   isLogged={isLogged}
                   onClick={isLogged && onClickEvents}
                 >
-                  SIGN IN
+                  Đăng Nhập
                 </Button>
               )}
               {!isAdmin && isLogged && (
@@ -411,7 +397,8 @@ const Header = () => {
         )}
         {button && (
           <Grid item xs>
-            {location.pathname === "/products" && <SearchBox />}
+            {/* {location.pathname === "/products" && <SearchBox />} */}
+            <SearchBox />
           </Grid>
         )}
       </Grid>

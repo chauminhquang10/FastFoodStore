@@ -10,60 +10,45 @@ const Footer = () => {
   return (
     <div className="footer-container">
       <section className="footer-subscription">
-        {!isLogged ? (
-          <>
-            <p className="footer-subscription-heading">
-              Join to the world of tasty fast food now!
-            </p>
-            <p className="footer-subscription-text">
-              You can subscribe at anytime.
-            </p>
-          </>
-        ) : (
-          <>
-            <p className="footer-subscription-heading">
-              Welcome you to the world of tasty fast food!
-            </p>
-            <p className="footer-subscription-text">
-              Enjoying every single delicious dishes.
-            </p>
-          </>
-        )}
-        {!isLogged && (
-          <div>
-            <form style={{ position: "relative" }}>
-              <input
-                className="footer-input"
-                type="email"
-                name="email"
-                placeholder="Please enter your email"
-              ></input>
-              <Button buttonStyle="btn--outline">Subscribe</Button>
-            </form>
-          </div>
-        )}
+        <>
+          <p className="footer-subscription-heading">
+            Tham gia cộng đồng Nông Sản Sạch!
+          </p>
+          <p className="footer-subscription-text">
+            Bạn có thể đăng kí bất kì lúc nào
+          </p>
+        </>
+        <div>
+          <form style={{ position: "relative" }}>
+            <input
+              className="footer-input"
+              type="email"
+              name="email"
+              placeholder="Nhập email của bạn"
+            ></input>
+            <Button buttonStyle="btn--outline">Đăng kí</Button>
+          </form>
+        </div>
       </section>
       <div className="footer-links">
         <div className="footer-link-wrapper">
           <div className="footer-link-items">
-            <h2>About Us</h2>
-            <Link to="">How it works</Link>
-            <Link to="/">Testimonials</Link>
-            <Link to="/">Careers</Link>
+            <h2>Về Chúng Tôi</h2>
+            <Link to="">Tổ chức</Link>
+            <Link to="/">Chứng thực</Link>
           </div>
           <div class="footer-link-items">
-            <h2>Contact Us</h2>
-            <Link to="/">Contact</Link>
-            <Link to="/">Support</Link>
+            <h2>Liên Hệ</h2>
+            <Link to="/">Email</Link>
+            <Link to="/">Hỗ trợ</Link>
           </div>
           <div class="footer-link-items">
-            <h2>Videos</h2>
-            <Link to="/">Submit Video</Link>
-            <Link to="/">Agency</Link>
-            <Link to="/">Influencer</Link>
+            <h2>Video</h2>
+            <Link to="/">Video</Link>
+            <Link to="/">Chi nhánh</Link>
           </div>
           <div class="footer-link-items">
-            <h2>Social Media</h2>
+            <h2>Mạng Xã Hội</h2>
             <Link to="/">Instagram</Link>
             <Link to="/">Facebook</Link>
             <Link to="/">Youtube</Link>
