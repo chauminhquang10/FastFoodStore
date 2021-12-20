@@ -10,6 +10,7 @@
 }
 
 .delete-all {
+  padding-top: 0.5%;
   text-align: right;
   margin: 20px;
   display: flex;

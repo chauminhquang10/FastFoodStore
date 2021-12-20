@@ -8,6 +8,8 @@ const jwt = require("jsonwebtoken");
 
 const sendMail = require("./sendMail");
 
+const sendConfirmMail = require("./sendConfirmMail");
+
 const { google } = require("googleapis");
 const { OAuth2 } = google.auth;
 
@@ -147,6 +149,34 @@ const userController = {
 
       sendMail(email, url, "Reset your password");
       res.json({ msg: "Resend the password , please check your email" });
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
+  },
+  sendConfirmMail: async (req, res) => {
+    try {
+      const {
+        email,
+        name,
+        country_code,
+        paymentID,
+        cart,
+        currentDate,
+        total,
+        officialTotal,
+      } = req.body;
+
+      sendConfirmMail(
+        email,
+        name,
+        country_code,
+        paymentID,
+        cart,
+        currentDate,
+        total,
+        officialTotal
+      );
+      res.json({ msg: "Send confirm email about the order successfully!" });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }

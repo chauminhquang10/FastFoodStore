@@ -1,8 +1,10 @@
+
 import food1 from "../../../../images/vet1.jpg";
 import food2 from "../../../../images/vet2.jpg";
 import food3 from "../../../../images/vet3.jpg";
 import food4 from "../../../../images/vet4.jpg";
 import food5 from "../../../../images/vet5.jpg";
+
 
 export const SliderData = [
   {

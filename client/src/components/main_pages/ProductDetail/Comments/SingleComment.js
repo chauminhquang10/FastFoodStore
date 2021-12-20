@@ -21,7 +21,6 @@ const SingleComment = ({ comment, productDetail, callback, setCallback }) => {
   const toggleReply = () => {
     setOpenReply(!openReply);
   };
-
   const onSubmit = async (event) => {
     event.preventDefault();
 

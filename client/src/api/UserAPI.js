@@ -13,6 +13,8 @@ const UserAPI = (token) => {
 
   const [favoriteProducts, setFavoriteProducts] = useState([]);
 
+  const [toggleShakingCart, setToggleShakingCart] = useState(false);
+
   useEffect(() => {
     if (token) {
       const getUser = async () => {
@@ -60,7 +62,7 @@ const UserAPI = (token) => {
 
     if (check) {
       setCart([...cart, { ...product, quantity: 1 }]);
-
+      setToggleShakingCart(true);
       await axios.patch(
         "/user/add_cart",
         {
@@ -112,6 +114,7 @@ const UserAPI = (token) => {
     callback: [callback, setCallback],
     favoriteProducts: [favoriteProducts, setFavoriteProducts],
     addToFavoriteList: addToFavoriteList,
+    toggleShakingCart: [toggleShakingCart, setToggleShakingCart],
   };
 };
 

@@ -44,6 +44,9 @@ router.post("/forget", userController.forgetPassword);
 
 router.post("/reset", authentication, userController.resetPassword);
 
+//send mail confirm đơn hàng
+router.post("/confirmMail", authentication, userController.sendConfirmMail);
+
 router.patch("/update", authentication, userController.updateUser);
 
 router.patch(

@@ -29,8 +29,10 @@ const Cards = () => {
           <ul className="cards__items">
             <CardItem
               src={food_3}
+
               text="Tạo điểm nhấn cho bữa ăn bằng món gà"
               label="Đọc thêm"
+
               path="/"
             />
             <CardItem
@@ -41,8 +43,11 @@ const Cards = () => {
             />
             <CardItem
               src={food_5}
+
               text="Kích thích vị giác bằng các món chế biến từ thịt tươi"
               label="Đọc thêm"
+
+
               path="/"
             />
           </ul>

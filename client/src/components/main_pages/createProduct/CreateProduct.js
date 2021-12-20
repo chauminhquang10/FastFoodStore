@@ -5,6 +5,24 @@ import Loading from "../Utils/Loading/Loading";
 import "./CreateProduct.css";
 import { useHistory, useParams } from "react-router-dom";
 import swal from "sweetalert";
+import {
+  InputAdornment,
+  makeStyles,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TablePagination,
+  TableRow,
+  TableSortLabel,
+  Toolbar,
+  Paper,
+} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import AddIcon from "@material-ui/icons/Add";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
 import { motion } from "framer-motion";
 
@@ -18,6 +36,41 @@ const initState = {
 };
 
 const CreateProduct = () => {
+  //MUI
+  const useStyles = makeStyles((theme) => ({
+    table: {
+      marginTop: theme.spacing(3),
+      "& thead th": {
+        fontWeight: "600",
+        color: theme.palette.primary.main,
+        backgroundColor: theme.palette.primary.light,
+      },
+      "& tbody td": {
+        fontWeight: "300",
+      },
+      "& tbody tr:hover": {
+        backgroundColor: "#fffbf2",
+        cursor: "pointer",
+      },
+    },
+    button: {
+      margin: theme.spacing(1),
+    },
+    searchInput: {
+      width: "75%",
+    },
+    pageContent: {
+      margin: theme.spacing(5),
+      padding: theme.spacing(3),
+    },
+    newButton: {
+      position: "absolute",
+      right: "10px",
+      padding: "20px 20px",
+    },
+  }));
+  const classes = useStyles();
+  ///////////////////////////
   const state = useContext(GlobalState);
   const [product, setProduct] = useState(initState);
   const [categories] = state.categoriesAPI.categories;
@@ -153,105 +206,149 @@ const CreateProduct = () => {
       animate={{ opacity: 1 }}
       initial={{ opacity: 0 }}
     >
-      <div className="create_product">
-        <div className="upload">
-          <input type="file" name="file" id="file_up" onChange={handleUpload} />
+      <Paper>
+        <div className="create_product">
+          <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="flex-start"
+            style={{ minHeight: "700px" }}
+          >
+            <Grid item xs={4}>
+              <div className="upload">
+                <input
+                  type="file"
+                  name="file"
+                  id="file_up"
+                  onChange={handleUpload}
+                />
 
-          {loading ? (
-            <div className="loading-img">
-              <Loading></Loading>
-            </div>
-          ) : (
-            <div id="file_img" style={styleUpload}>
-              <img src={image ? image.url : ""} alt="" />
-              <span onClick={handleDestroy}>X</span>
-            </div>
-          )}
+                {loading ? (
+                  <div className="loading-img">
+                    <Loading></Loading>
+                  </div>
+                ) : (
+                  <div id="file_img" style={styleUpload}>
+                    <img src={image ? image.url : ""} alt="" />
+                    <span onClick={handleDestroy}>X</span>
+                  </div>
+                )}
+              </div>
+            </Grid>
+            <Grid item xs>
+              <form onSubmit={handleSubmit} className={classes.form}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  label="Product ID"
+                  type="text"
+                  name="product_id"
+                  id="product_id"
+                  required
+                  value={product.product_id}
+                  onChange={handleChangeInput}
+                  disabled={onEdit}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  label="Title"
+                  type="text"
+                  name="title"
+                  id="title"
+                  required
+                  value={product.title}
+                  onChange={handleChangeInput}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  label="Price"
+                  type="number"
+                  name="price"
+                  id="price"
+                  required
+                  value={product.price}
+                  onChange={handleChangeInput}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  InputLabelProps={{ shrink: true }}
+                  label="Description"
+                  type="text"
+                  name="description"
+                  id="description"
+                  required
+                  value={product.description}
+                  onChange={handleChangeInput}
+                  multiline
+                  rows={5}
+                  rowsMax={5}
+                />
+                <TextField
+                  multiline
+                  rows={5}
+                  rowsMax={5}
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  InputLabelProps={{ shrink: true }}
+                  label="Description"
+                  type="text"
+                  name="content"
+                  id="content"
+                  required
+                  value={product.content}
+                  onChange={handleChangeInput}
+                />
+                {/* <Autocomplete
+                  name="category"
+                  options={categories}
+                  getOptionLabel={(Category) => Category.name}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Category"
+                      variant="outlined"
+                      value={product.category}
+                      onChange={handleChangeInput}
+                    />
+                  )}
+                /> */}
+                <div className="row">
+                  <label>Category: </label>
+                  <select
+                    name="category"
+                    value={product.category}
+                    onChange={handleChangeInput}
+                  >
+                    <option value="">Please select a category</option>
+                    {categories.map((category) => (
+                      <option>{category.name}</option>
+                    ))}
+                  </select>
+                </div>
+                <Button
+                  style={{ marginTop: "10px" }}
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
+                  {onEdit ? "Update" : "Create"}
+                </Button>
+              </form>
+            </Grid>
+          </Grid>
         </div>
-
-        <form onSubmit={handleSubmit}>
-          <div className="row">
-            <label htmlFor="product_id">Product ID</label>
-            <input
-              type="text"
-              name="product_id"
-              id="product_id"
-              required
-              value={product.product_id}
-              onChange={handleChangeInput}
-              disabled={onEdit}
-            />
-          </div>
-
-          <div className="row">
-            <label htmlFor="title">Title</label>
-            <input
-              type="text"
-              name="title"
-              id="title"
-              required
-              value={product.title}
-              onChange={handleChangeInput}
-            />
-          </div>
-
-          <div className="row">
-            <label htmlFor="price">Price</label>
-            <input
-              type="number"
-              name="price"
-              id="price"
-              required
-              value={product.price}
-              onChange={handleChangeInput}
-            />
-          </div>
-
-          <div className="row">
-            <label htmlFor="description">Description</label>
-            <textarea
-              type="text"
-              name="description"
-              id="description"
-              required
-              value={product.description}
-              onChange={handleChangeInput}
-              rows="5"
-            />
-          </div>
-
-          <div className="row">
-            <label htmlFor="content">Content</label>
-            <textarea
-              type="text"
-              name="content"
-              id="content"
-              required
-              value={product.content}
-              onChange={handleChangeInput}
-              rows="7"
-            />
-          </div>
-
-          <div className="row">
-            <label htmlFor="categories">Categories: </label>
-            <select
-              name="category"
-              value={product.category}
-              onChange={handleChangeInput}
-            >
-              <option value="">Please select a category</option>
-              {categories.map((category) => (
-                <option value={category._id} key={category._id}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <button type="submit">{onEdit ? "Update" : "Create"}</button>
-        </form>
-      </div>
+      </Paper>
     </motion.div>
   );
 };

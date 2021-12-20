@@ -10,8 +10,6 @@ import {
 
 import "./GoogleMap.css";
 
-// import StoreMarker from "./StoreMarker";
-
 import { Descriptions } from "antd";
 
 import AutoComplete from "react-google-autocomplete";
@@ -36,9 +34,6 @@ class ShopGoogleMap extends Component {
       lat: 0,
       lng: 0,
     },
-    // markers: [
-
-    // ],
   };
 
   componentDidMount() {
@@ -217,10 +212,6 @@ class ShopGoogleMap extends Component {
             types={["(regions)"]}
             onPlaceSelected={this.onPlaceSelected}
           ></AutoComplete>
-
-          {/* {props.markers.map((props) => (
-            <StoreMarker key={props.name} {...props}></StoreMarker>
-          ))} */}
         </GoogleMap>
       ))
     );
@@ -245,11 +236,10 @@ class ShopGoogleMap extends Component {
           </Descriptions>
 
           <MapWithAMarker
-            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAi3JlWlYxuB0SRvYR2u7ls06qyv0i1Ph4&v=3.exp&libraries=geometry,drawing,places"
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGQ_QaoqrkLceZcBITrVLbkpmEDHVNS0k&v=3.exp&libraries=geometry,drawing,places"
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `800px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
-            // markers={this.state.markers}
           />
         </div>
       </>

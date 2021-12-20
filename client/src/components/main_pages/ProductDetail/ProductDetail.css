@@ -6,14 +6,14 @@
   padding: 50px;
   font-size: 150%;
 }
-.detail img {
+/* .detail img {
   max-width: 400px;
   width: 100%;
   margin: 20px;
   height: 450px;
   object-fit: cover;
   display: block;
-}
+} */
 
 .related-products {
   margin-left: 91px;
@@ -51,11 +51,6 @@
 }
 
 .product-detail-tags {
-  margin-top: 60px;
-}
-
-.favorite-icon:hover {
-  cursor: pointer;
 }
 
 .customer-evaluation {
